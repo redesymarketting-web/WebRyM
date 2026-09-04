@@ -82,7 +82,6 @@ export default function QueHacemos() {
                   <h3 className="text-2xl font-black uppercase text-ink md:text-3xl">
                     {card.title}
                   </h3>
-                  <p className="mt-2 text-lg font-medium text-ink/70">{card.desc}</p>
                   <div className="mt-6 flex flex-wrap justify-center gap-2">
                     {card.tags.map((t) => (
                       <span
