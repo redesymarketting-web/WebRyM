@@ -13,7 +13,7 @@ const nichos = [
     badge: "Sweet Branding",
     card: "/crunchiebite.jpg",
     desc: "Diseño de marca colorido, fotos de producto irresistibles y feeds que endulzan tu audiencia.",
-    heros: ["/dulzuras.jpg", "/crunchiebite.jpg", "/dulzuras.jpg", "/crunchiebite.jpg", "/dulzuras.jpg", "/crunchiebite.jpg"],
+    heros: ["/dulzuras.jpg", "/crunchiebite.jpg", "/dulzuras.jpg"],
     titulo: "Pastelerías que venden con los ojos",
   },
   {
@@ -23,7 +23,7 @@ const nichos = [
     badge: "Fitness Power",
     card: "/ylanflores.jpg",
     desc: "Volantes de retos, promos de clases y contenido que convierten seguidores en atletas.",
-    heros: ["/ylanflores.jpg", "/ylanflores.jpg", "/ylanflores.jpg", "/ylanflores.jpg", "/ylanflores.jpg", "/ylanflores.jpg"],
+    heros: ["/ylanflores.jpg", "/ylanflores.jpg", "/ylanflores.jpg"],
     titulo: "Entrenamiento que inspira disciplina",
   },
   {
@@ -33,7 +33,7 @@ const nichos = [
     badge: "Premium Property",
     card: "/javiercanizares.jpg",
     desc: "Volantes elegantes y publicaciones que posicionan tu marca como la asesora de confianza del mercado.",
-    heros: ["/javiercanizares.jpg", "/doloresrodriguez.jpg", "/javiercanizares.jpg", "/doloresrodriguez.jpg", "/javiercanizares.jpg", "/doloresrodriguez.jpg"],
+    heros: ["/javiercanizares.jpg", "/doloresrodriguez.jpg", "/javiercanizares.jpg"],
     titulo: "Propiedades premium, presentación premium",
   },
   {
@@ -43,7 +43,7 @@ const nichos = [
     badge: "Auto Industry",
     card: "/dayarey.jpg",
     desc: "Identidad gráfica y contenido que transmiten confianza y calidad en tu taller.",
-    heros: ["/dayarey.jpg", "/dayarey.jpg", "/dayarey.jpg", "/dayarey.jpg", "/dayarey.jpg", "/dayarey.jpg"],
+    heros: ["/dayarey.jpg", "/dayarey.jpg", "/dayarey.jpg"],
     titulo: "Mecánica de primer nivel, imagen de primer nivel",
   },
 ];
@@ -163,7 +163,10 @@ export default function Nichos() {
                   aria-selected={activa}
                   aria-controls={`panel-${n.id}`}
                   id={`tab-${n.id}`}
-                  onClick={() => setActivo(i)}
+                  onClick={() => {
+                    setActivo(i);
+                    areaRef.current?.scrollIntoView({ behavior: "smooth", block: "nearest" });
+                  }}
                   className={`group relative overflow-hidden rounded-[1.75rem] text-center transition-all duration-300 ${
                     activa
                       ? "bg-volt text-ink shadow-[0_0_40px_rgba(255,236,1,0.35)] ring-2 ring-volt"
@@ -200,7 +203,7 @@ export default function Nichos() {
           {/* Panel de vista previa */}
           <div
             ref={areaRef}
-            className="mt-8 overflow-hidden rounded-[2rem] bg-snow p-6 shadow-xl md:p-10"
+            className="mt-8 scroll-mt-28 overflow-hidden rounded-[2rem] bg-snow p-6 shadow-xl md:p-10"
           >
             <div className="grid items-center gap-10 lg:grid-cols-2">
               <div>
