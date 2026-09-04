@@ -13,17 +13,18 @@ module.exports = {
         snow: "#fefcfd",
       },
       fontFamily: {
-        display: ["var(--font-display)", "Space Grotesk", "sans-serif"],
-        body: ["var(--font-body)", "Inter", "sans-serif"],
+        display: ["var(--font-display)", "Montserrat", "sans-serif"],
+        body: ["var(--font-display)", "Montserrat", "sans-serif"],
+        script: ["var(--font-script)", "Caveat", "cursive"],
       },
       keyframes: {
         floaty: {
-          "0%, 100%": { transform: "translateY(0px) rotate(var(--tilt, 0deg))" },
-          "50%": { transform: "translateY(-18px) rotate(var(--tilt, 0deg))" },
+          "0%, 100%": { transform: "translateY(0px)" },
+          "50%": { transform: "translateY(-10px)" },
         },
         floaty2: {
-          "0%, 100%": { transform: "translateY(0px) rotate(var(--tilt, 0deg))" },
-          "50%": { transform: "translateY(14px) rotate(var(--tilt, 0deg))" },
+          "0%, 100%": { transform: "translateY(0px)" },
+          "50%": { transform: "translateY(8px)" },
         },
         glow: {
           "0%, 100%": { opacity: "0.6" },
@@ -39,8 +40,8 @@ module.exports = {
         },
       },
       animation: {
-        floaty: "floaty 6s ease-in-out infinite",
-        floaty2: "floaty2 7s ease-in-out infinite",
+        floaty: "floaty 7s ease-in-out infinite",
+        floaty2: "floaty2 8s ease-in-out infinite",
         glow: "glow 4s ease-in-out infinite",
         pulseSoft: "pulseSoft 5s ease-in-out infinite",
         marquee: "marquee 28s linear infinite",

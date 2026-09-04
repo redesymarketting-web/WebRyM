@@ -1,16 +1,18 @@
-import { Inter, Space_Grotesk } from "next/font/google";
+import { Montserrat, Caveat } from "next/font/google";
 import "./globals.css";
 
-const spaceGrotesk = Space_Grotesk({
+const montserrat = Montserrat({
   subsets: ["latin"],
   display: "swap",
   variable: "--font-display",
+  weight: ["400", "500", "600", "700", "800", "900"],
 });
 
-const inter = Inter({
+const caveat = Caveat({
   subsets: ["latin"],
   display: "swap",
-  variable: "--font-body",
+  variable: "--font-script",
+  weight: ["400", "500", "600", "700"],
 });
 
 const SITE_URL = "https://web-ry-m.vercel.app";
@@ -99,7 +101,7 @@ export const viewport = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="es" className={`${spaceGrotesk.variable} ${inter.variable}`}>
+    <html lang="es" className={`${montserrat.variable} ${caveat.variable}`}>
       <head>
         <meta name="geo.region" content="VE" />
         <meta name="geo.placename" content="Venezuela" />

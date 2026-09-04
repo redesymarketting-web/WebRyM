@@ -3,6 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import Reveal from "./Reveal";
+import { DoodleSpiral, DoodleScribble } from "./Doodles";
 
 function InstagramIcon() {
   return (
@@ -44,6 +45,8 @@ export default function Footer() {
   return (
     <footer id="contacto" className="relative overflow-hidden bg-ink">
       <div className="pointer-events-none absolute inset-x-0 -top-32 mx-auto h-72 w-[40rem] rounded-full bg-ember/20 blur-[130px]" />
+      <DoodleSpiral className="pointer-events-none absolute left-[6%] top-20 hidden h-14 w-14 opacity-50 lg:block" />
+      <DoodleScribble className="pointer-events-none absolute right-[8%] bottom-40 hidden w-20 opacity-40 lg:block" />
 
       <div className="mx-auto max-w-7xl px-5 py-20 md:py-28 lg:px-8">
         <Reveal>
@@ -79,6 +82,9 @@ export default function Footer() {
           </div>
           <p className="mt-5 text-center text-sm text-snow/50">
             Da el primer paso. Tu presencia digital empieza hoy.
+          </p>
+          <p className="font-script mt-2 text-3xl text-ember md:text-4xl">
+            Somos Diferentes para Ti
           </p>
         </Reveal>
 
