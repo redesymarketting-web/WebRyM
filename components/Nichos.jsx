@@ -9,7 +9,6 @@ const nichos = [
   {
     id: "postres",
     nombre: "Postres",
-    emoji: "🧁",
     primary: "#e91e63",
     badge: "Sweet Branding",
     card: "/crunchiebite.jpg",
@@ -20,7 +19,6 @@ const nichos = [
   {
     id: "dojos",
     nombre: "Dojos & Gimnasios",
-    emoji: "🥋",
     primary: "#ef4444",
     badge: "Fitness Power",
     card: "/ylanflores.jpg",
@@ -31,7 +29,6 @@ const nichos = [
   {
     id: "realestate",
     nombre: "Real Estate",
-    emoji: "🏠",
     primary: "#0ea5e9",
     badge: "Premium Property",
     card: "/javiercanizares.jpg",
@@ -42,7 +39,6 @@ const nichos = [
   {
     id: "talleres",
     nombre: "Talleres Automotrices",
-    emoji: "🔧",
     primary: "#f59e0b",
     badge: "Auto Industry",
     card: "/dayarey.jpg",
@@ -51,6 +47,43 @@ const nichos = [
     titulo: "Mecánica de primer nivel, imagen de primer nivel",
   },
 ];
+
+function NicheIcon({ id }) {
+  const stroke = "#f7651c";
+  const props = { stroke, strokeWidth: 2, strokeLinecap: "round", strokeLinejoin: "round", fill: "none" };
+  switch (id) {
+    case "postres":
+      return (
+        <svg viewBox="0 0 24 24" className="h-7 w-7" aria-hidden="true">
+          <path {...props} d="M7.3 12h9.4l-1 6.2a1.9 1.9 0 0 1-1.9 1.6H10.2a1.9 1.9 0 0 1-1.9-1.6z" />
+          <path {...props} d="M5.4 10.6c0-1.4 1-2.4 2.4-2.4.1-.8 1-1.2 1.9-1.1.4-1.3 2.1-1.3 2.5 0 .8-.1 1.8.4 1.9 1.2 1.3 0 2.4 1 2.4 2.4z" />
+          <path {...props} d="M16.4 7.2a1 1 0 1 0 .01 0" />
+        </svg>
+      );
+    case "dojos":
+      return (
+        <svg viewBox="0 0 24 24" className="h-7 w-7" aria-hidden="true">
+          <path {...props} d="M4 9.5v5M6.5 9v6M6.5 12h11M17.5 9v6M20 9.5v5" />
+        </svg>
+      );
+    case "realestate":
+      return (
+        <svg viewBox="0 0 24 24" className="h-7 w-7" aria-hidden="true">
+          <path {...props} d="M4 11 12 4.5 20 11" />
+          <path {...props} d="M6 10.5V20h12v-9.5" />
+          <path {...props} d="M10 20v-5h4v5" />
+        </svg>
+      );
+    case "talleres":
+      return (
+        <svg viewBox="0 0 24 24" className="h-7 w-7" aria-hidden="true">
+          <path {...props} d="M21 7a6.5 6.5 0 0 0-11 4.6L4 17.7 6.3 20l6.1-6.1A6.5 6.5 0 0 0 21 7z" />
+        </svg>
+      );
+    default:
+      return null;
+  }
+}
 
 function FeedMockup({ items }) {
   return (
@@ -131,7 +164,7 @@ export default function Nichos() {
                   aria-controls={`panel-${n.id}`}
                   id={`tab-${n.id}`}
                   onClick={() => setActivo(i)}
-                  className={`group relative overflow-hidden rounded-[1.75rem] text-left transition-all duration-300 ${
+                  className={`group relative overflow-hidden rounded-[1.75rem] text-center transition-all duration-300 ${
                     activa
                       ? "bg-volt text-ink shadow-[0_0_40px_rgba(255,236,1,0.35)] ring-2 ring-volt"
                       : "bg-snow text-ink hover:bg-volt hover:text-ink"
@@ -154,11 +187,9 @@ export default function Nichos() {
                     )}
                   </div>
                   <div className="p-4">
-                    <p className="text-[11px] font-black uppercase tracking-widest opacity-60">
-                      Nicho {i + 1}
-                    </p>
-                    <h3 className="mt-1 text-lg font-black uppercase leading-tight md:text-xl">
-                      {n.emoji} {n.nombre}
+                    <h3 className="flex items-center justify-center gap-2 text-lg font-black uppercase leading-tight md:text-xl">
+                      <NicheIcon id={n.id} />
+                      <span>{n.nombre}</span>
                     </h3>
                   </div>
                 </button>
