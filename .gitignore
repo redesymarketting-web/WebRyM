@@ -1,0 +1,46 @@
+# dependencies
+/node_modules
+/.pnp
+.pnp.js
+
+# testing
+/coverage
+
+# next.js
+/.next/
+/out/
+
+# production
+/build
+
+# misc
+.DS_Store
+*.pem
+
+# debug
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# local env files
+.env*.local
+
+# vercel
+.vercel
+
+# logs
+*.log
+
+# imágenes originales en la raíz (las canónicas viven en /public)
+/crunchiebite.jpg
+/dayarey.jpg
+/doloresrodriguez.jpg
+/dougymaru.png
+/dulzuras.jpg
+/javiercanizares.jpg
+/logonew.png
+/ylanflores.jpg
+
+# typescript
+*.tsbuildinfo
+next-env.d.ts

@@ -1,0 +1,89 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: dark;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: #020202;
+  color: #fefcfd;
+  font-family: var(--font-body), Inter, sans-serif;
+  overflow-x: hidden;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--font-display), "Space Grotesk", sans-serif;
+  letter-spacing: -0.02em;
+}
+
+::selection {
+  background-color: #f7651c;
+  color: #020202;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+::-webkit-scrollbar-track {
+  background: #020202;
+}
+::-webkit-scrollbar-thumb {
+  background: #f7651c;
+  border-radius: 999px;
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  .bg-grid {
+    background-image:
+      linear-gradient(rgba(246, 101, 28, 0.05) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(246, 101, 28, 0.05) 1px, transparent 1px);
+    background-size: 48px 48px;
+  }
+
+  .text-stroke {
+    -webkit-text-stroke: 1.5px rgba(254, 252, 253, 0.25);
+    color: transparent;
+  }
+
+  .glow-ember {
+    box-shadow: 0 0 60px rgba(247, 101, 28, 0.45), 0 0 120px rgba(255, 236, 1, 0.15);
+  }
+
+  .glow-ember-soft {
+    box-shadow: 0 0 30px rgba(247, 101, 28, 0.25);
+  }
+
+  .vignette {
+    background: radial-gradient(
+      circle at center,
+      transparent 30%,
+      rgba(2, 2, 2, 0.65) 100%
+    );
+  }
+}
+
+/* Animaciones de entrada al hacer scroll */
+.reveal {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
