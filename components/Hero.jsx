@@ -12,10 +12,10 @@ import {
 } from "./Doodles";
 
 const panelCards = [
-  { src: "/dulzuras.jpg", label: "@dulzuras", likes: "2.4k", tilt: "-2deg", anim: "animate-floaty" },
-  { src: "/crunchiebite.jpg", label: "Crunchie Bite", likes: "1.8k", tilt: "1deg", anim: "animate-floaty2" },
-  { src: "/javiercanizares.jpg", label: "Javier Cañizares", likes: "3.1k", tilt: "0deg", anim: "animate-floaty2" },
-  { src: "/ylanflores.jpg", label: "Ylan Flores", likes: "2.9k", tilt: "-1deg", anim: "animate-floaty" },
+  { src: "/dulzuras.jpg", label: "@dulzuras", likes: "2.4k", tilt: "-2deg", anim: "animate-floaty", ratio: "aspect-[4/5]" },
+  { src: "/crunchiebite.jpg", label: "Crunchie Bite", likes: "1.8k", tilt: "1deg", anim: "animate-floaty2", ratio: "aspect-[4/5]" },
+  { src: "/javiercanizares.jpg", label: "Javier Cañizares", likes: "3.1k", tilt: "0deg", anim: "animate-floaty2", ratio: "aspect-[9/16]" },
+  { src: "/ylanflores.jpg", label: "Ylan Flores", likes: "2.9k", tilt: "-1deg", anim: "animate-floaty", ratio: "aspect-[9/16]" },
 ];
 
 export default function Hero() {
@@ -39,7 +39,7 @@ export default function Hero() {
             Marketing Digital · Diseño · Estrategia
           </span>
 
-          <h1 className="text-[clamp(2.6rem,7vw,6.2rem)] font-black uppercase leading-[0.95] tracking-tight text-snow">
+          <h1 className="text-[clamp(2.1rem,4.5vw,4.25rem)] font-black uppercase leading-[1.02] tracking-tight text-snow">
             Potenciamos tu
             <span className="relative mt-1 block text-ember">
               presencia
@@ -89,8 +89,8 @@ export default function Hero() {
                   src={card.src}
                   alt={`Post de redes sociales de ${card.label}`}
                   width={240}
-                  height={240}
-                  className="aspect-square w-full object-cover"
+                  height={300}
+                  className={`${card.ratio} w-full object-cover`}
                 />
                 <div className="flex items-center gap-3 px-3 py-2 text-[11px] text-snow/80">
                   <span>♥ {card.likes}</span>
