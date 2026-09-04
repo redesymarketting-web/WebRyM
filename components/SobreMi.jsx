@@ -15,14 +15,14 @@ export default function SobreMi() {
         {/* Título */}
         <Reveal>
           <div className="mb-14 flex flex-wrap items-center gap-x-6 gap-y-3">
-            <h2 className="text-5xl font-black uppercase text-snow md:text-7xl">
+            <h2 className="text-[clamp(1.9rem,4vw,3.4rem)] font-black uppercase text-snow">
               Sobre{" "}
               <span className="relative inline-block">
                 mí
                 <DoodleScribble className="pointer-events-none absolute -bottom-3 left-0 w-full opacity-70" />
               </span>
             </h2>
-            <div className="flex items-center gap-4 text-4xl font-black uppercase md:text-6xl">
+            <div className="flex items-center gap-4 text-[clamp(1.5rem,3vw,2.6rem)] font-black uppercase">
               <span className="bg-ember px-4 py-1 text-ink">Maru</span>
               <span className="bg-volt px-4 py-1 text-ink">Doug</span>
             </div>
@@ -33,31 +33,23 @@ export default function SobreMi() {
           {/* Foto */}
           <Reveal>
             <div className="relative mx-auto w-full max-w-md">
-              <div className="pointer-events-none absolute -inset-6 rotate-3 rounded-[3rem] bg-gradient-to-br from-ember/40 to-volt/30 blur-2xl" />
+              <Image
+                src="/dougymaru.png"
+                alt="Maru y Doug, creadores de Redes y Marketing"
+                width={520}
+                height={620}
+                className="h-[520px] w-full object-cover"
+                priority
+              />
 
-              <div className="relative overflow-hidden rounded-[3rem] rounded-tr-[9rem] rounded-bl-[1.5rem] border-2 border-white/20">
-                <Image
-                  src="/dougymaru.png"
-                  alt="Maru y Doug, creadores de Redes y Marketing"
-                  width={520}
-                  height={620}
-                  className="h-[520px] w-full object-cover"
-                  priority
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-ink/60 via-transparent to-transparent" />
-                <span className="absolute bottom-5 left-5 font-script text-3xl text-snow drop-shadow-lg">
-                  Creadores del proyecto
-                </span>
-              </div>
-
-              {/* Isologo circular */}
-              <div className="animate-floaty absolute -bottom-8 -left-8 flex h-28 w-28 items-center justify-center rounded-full border-4 border-ink bg-gradient-to-tr from-ember to-volt p-2 shadow-[0_0_50px_rgba(247,101,28,0.6)]">
+              {/* Isologo flotante */}
+              <div className="animate-floaty absolute -bottom-8 -right-8 h-28 w-28 md:h-32 md:w-32">
                 <Image
                   src="/logonew.png"
                   alt="Isologo de Redes y Marketing"
-                  width={96}
-                  height={96}
-                  className="rounded-full object-contain bg-ink"
+                  width={128}
+                  height={128}
+                  className="h-full w-full object-contain"
                 />
               </div>
             </div>
@@ -108,7 +100,7 @@ export default function SobreMi() {
                   Redes y Maketting
                 </p>
                 <DoodleScribble className="pointer-events-none ml-auto mt-1 w-32 md:w-44" />
-                <p className="mt-3 inline-block border-b-2 border-volt pb-1 font-black uppercase tracking-wide text-volt">
+                <p className="font-script mt-2 text-3xl text-volt md:text-4xl">
                   Somos Diferentes para Ti
                 </p>
               </div>
