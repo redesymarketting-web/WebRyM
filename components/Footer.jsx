@@ -62,7 +62,7 @@ export default function Footer() {
         <Reveal delay={120}>
           <div className="mt-14 flex justify-center">
             <Link
-              href="https://wa.me/584241234567?text=Hola%20Redes%20y%20Marketing%2C%20quiero%20escalar%20mi%20marca"
+              href="https://wa.me/584125012969?text=Hola%20Redes%20y%20Marketing%2C%20quiero%20escalar%20mi%20marca"
               target="_blank"
               rel="noopener noreferrer"
               aria-label="Iniciar asesoría inmediata por WhatsApp"
@@ -103,7 +103,7 @@ export default function Footer() {
               { href: "https://instagram.com/redesymarketting", label: "Instagram de Redes y Marketing", Icon: InstagramIcon },
               { href: "https://facebook.com/redesymarketting", label: "Facebook de Redes y Marketing", Icon: FacebookIcon },
               { href: "https://tiktok.com/@redesymarketting", label: "TikTok de Redes y Marketing", Icon: TikTokIcon },
-              { href: "https://wa.me/584241234567", label: "WhatsApp de Redes y Marketing", Icon: WhatsAppIcon },
+              { href: "https://wa.me/584125012969", label: "WhatsApp de Redes y Marketing", Icon: WhatsAppIcon },
             ].map(({ href, label, Icon }) => (
               <Link
                 key={href}
@@ -126,12 +126,12 @@ export default function Footer() {
               hola@redesymarketting.com
             </a>
             <a
-              href="https://wa.me/584241234567"
+              href="https://wa.me/584125012969"
               target="_blank"
               rel="noopener noreferrer"
               className="text-sm font-medium text-snow/70 transition-colors hover:text-volt"
             >
-              +58 424-123-4567
+              +58 412-501-2969
             </a>
           </div>
         </div>
