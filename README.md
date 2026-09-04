@@ -11,16 +11,16 @@ Construida con **Next.js 14 (App Router) + Tailwind CSS**, con **SEO optimizado*
 | Acento | `#f7651c` (naranja vibrante) |
 | Acento 2 | `#ffec01` (amarillo energético) |
 | Texto | `#fefcfd` (blanco) |
-| Títulos | Space Grotesk (geométrico moderno) |
-| Cuerpo | Inter (sans-serif limpia) |
+| Títulos y cuerpo | Montserrat |
+| Caligráfica (firmas/slogan) | Caveat |
 
 ## Estructura de la página
 
-- **Hero**: logotipo, H1 "POTENCIAMOS TU PRESENCIA DIGITAL CON DISEÑO Y ESTRATEGIA", collage animado flotante de cards sociales, flyers y notificaciones, CTA "Quiero escalar mi marca".
-- **¿QUÉ HACEMOS?**: dos columnas con iconos (Desarrollo Web y Gestión de Redes) y CTA "Ver Portafolio".
-- **Adaptable a tu Nicho**: sistema de pestañas interactivas (Postres, Dojos & Gimnasios, Real Estate, Talleres Automotrices) que cambia las imágenes, el feed mockup y la estética en tiempo real.
-- **SOBRE MÍ**: foto del creador en marco geométrico asimétrico + isologo circular.
-- **Footer / CTA masivo**: "¿LISTO PARA DOMINAR TU MERCADO DIGITAL?" con botón gigante de gradiente "INICIAR ASESORÍA INMEDIATA" y enlaces sociales.
+- **Hero**: H1 "POTENCIAMOS TU PRESENCIA DIGITAL CON DISEÑO Y ESTRATEGIA", collage animado flotante de cards sociales, flyers y notificaciones, CTA "Quiero escalar mi marca" y marquee inferior.
+- **¿QUÉ HACEMOS?**: tarjetas blancas con iconos SVG (Desarrollo Web y Gestión de Redes) y CTA "Ver Portafolio".
+- **Tu Nicho**: pestañas interactivas (Postres, Dojos & Gimnasios, Real Estate, Talleres Automotrices) con scroll suave al panel y feed de 3 miniaturas ajustadas a cada nicho.
+- **SOBRE MÍ**: título compacto, foto limpia de los creadores (sin marco), logo flotante en la esquina inferior derecha y slogan caligráfico amarillo.
+- **Footer / CTA**: "¿LISTO PARA DOMINAR TU MERCADO DIGITAL?" con botón de asesoría por WhatsApp y enlaces a Instagram y WhatsApp.
 
 ## Comandos
 

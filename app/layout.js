@@ -128,8 +128,6 @@ export default function RootLayout({ children }) {
                 },
                 sameAs: [
                   "https://instagram.com/redesymarketting",
-                  "https://facebook.com/redesymarketting",
-                  "https://tiktok.com/@redesymarketting",
                 ],
               },
               author: {
