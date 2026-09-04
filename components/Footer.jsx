@@ -15,22 +15,6 @@ function InstagramIcon() {
   );
 }
 
-function FacebookIcon() {
-  return (
-    <svg viewBox="0 0 24 24" className="h-6 w-6" fill="currentColor" aria-hidden="true">
-      <path d="M22 12a10 10 0 1 0-11.6 9.9v-7H7.9V12h2.5V9.8c0-2.5 1.5-3.9 3.8-3.9 1.1 0 2.2.2 2.2.2v2.5h-1.3c-1.2 0-1.6.8-1.6 1.6V12h2.8l-.4 2.9h-2.3v7A10 10 0 0 0 22 12z" />
-    </svg>
-  );
-}
-
-function TikTokIcon() {
-  return (
-    <svg viewBox="0 0 24 24" className="h-6 w-6" fill="currentColor" aria-hidden="true">
-      <path d="M19.6 7.2a5.3 5.3 0 0 1-3.2-1.1 5.3 5.3 0 0 1-1.9-2.8h-3.2v11.9a2.9 2.9 0 1 1-2.9-2.9c.3 0 .6 0 .9.1V8.9a6.3 6.3 0 0 0-.9-.06 6.2 6.2 0 1 0 6.2 6.2V8.9a8.4 8.4 0 0 0 5 1.7V7.4a5.2 5.2 0 0 1-.9-.2z" />
-    </svg>
-  );
-}
-
 function WhatsAppIcon() {
   return (
     <svg viewBox="0 0 24 24" className="h-6 w-6" fill="currentColor" aria-hidden="true">
@@ -69,12 +53,12 @@ export default function Footer() {
               target="_blank"
               rel="noopener noreferrer"
               aria-label="Iniciar asesoría inmediata por WhatsApp"
-              className="group relative w-full max-w-4xl"
+              className="group relative w-full max-w-xl"
             >
               <span className="absolute -inset-1 rounded-full bg-gradient-to-r from-ember via-volt to-ember opacity-40 blur-lg transition-opacity group-hover:opacity-70" />
-              <span className="relative flex items-center justify-center gap-4 rounded-full bg-gradient-to-r from-ember to-volt px-6 py-7 text-center text-xl font-black uppercase tracking-wide text-ink transition-transform duration-300 group-hover:scale-[1.03] md:py-9 md:text-3xl">
+              <span className="relative flex items-center justify-center gap-3 rounded-full bg-gradient-to-r from-ember to-volt px-5 py-3 text-center text-sm font-black uppercase tracking-wide text-ink transition-transform duration-300 group-hover:scale-[1.03] md:py-4 md:text-base">
                 Iniciar asesoría inmediata
-                <svg viewBox="0 0 24 24" className="h-8 w-8 transition-transform group-hover:translate-x-2 md:h-10 md:w-10" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                <svg viewBox="0 0 24 24" className="h-5 w-5 transition-transform group-hover:translate-x-2 md:h-6 md:w-6" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
                   <path d="M5 12h14M13 5l7 7-7 7" />
                 </svg>
               </span>
@@ -82,9 +66,6 @@ export default function Footer() {
           </div>
           <p className="mt-5 text-center text-sm text-snow/50">
             Da el primer paso. Tu presencia digital empieza hoy.
-          </p>
-          <p className="font-script mt-2 text-3xl text-ember md:text-4xl">
-            Somos Diferentes para Ti
           </p>
         </Reveal>
 
@@ -107,8 +88,6 @@ export default function Footer() {
           <div className="flex items-center gap-4">
             {[
               { href: "https://instagram.com/redesymarketting", label: "Instagram de Redes y Marketing", Icon: InstagramIcon },
-              { href: "https://facebook.com/redesymarketting", label: "Facebook de Redes y Marketing", Icon: FacebookIcon },
-              { href: "https://tiktok.com/@redesymarketting", label: "TikTok de Redes y Marketing", Icon: TikTokIcon },
               { href: "https://wa.me/584125012969", label: "WhatsApp de Redes y Marketing", Icon: WhatsAppIcon },
             ].map(({ href, label, Icon }) => (
               <Link
@@ -122,23 +101,6 @@ export default function Footer() {
                 <Icon />
               </Link>
             ))}
-          </div>
-
-          <div className="flex flex-col items-center gap-1 text-center">
-            <a
-              href="mailto:hola@redesymarketting.com"
-              className="text-sm font-medium text-snow/70 transition-colors hover:text-volt"
-            >
-              hola@redesymarketting.com
-            </a>
-            <a
-              href="https://wa.me/584125012969"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-sm font-medium text-snow/70 transition-colors hover:text-volt"
-            >
-              +58 412-501-2969
-            </a>
           </div>
         </div>
       </div>
