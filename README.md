@@ -62,11 +62,12 @@ git push -u origin main
 3. Conecta/importa el repositorio **redesymarketting-web/WebRyM**.
 4. Vercel detectará automáticamente **Next.js** (no cambies nada en Framework Preset).
 5. Clic en **Deploy**.
-6. Al terminar te dará una URL pública, por ejemplo: `https://webrym.vercel.app`.
+6. Al terminar te dará una URL pública. La de este proyecto es: `https://web-ry-m.vercel.app`.
 
 ### Actualizar la URL en el SEO (importante)
 
-Una vez tengas tu URL definitiva de Vercel (o un dominio propio), actualiza estas dos ubicaciones para que el SEO apunte a tu dominio real:
+La `SITE_URL` del proyecto ya apunta a `https://web-ry-m.vercel.app`.
+Si alguna vez cambias la URL (dominio propio, etc.), actualiza estas ubicaciones:
 
 - `app/layout.js` → `const SITE_URL = "https://TU-URL.vercel.app";`
 - `app/sitemap.js` → `const SITE_URL = "https://TU-URL.vercel.app";`

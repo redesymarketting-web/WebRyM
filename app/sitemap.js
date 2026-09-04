@@ -1,4 +1,4 @@
-const SITE_URL = "https://redesymarketting-web.vercel.app";
+const SITE_URL = "https://web-ry-m.vercel.app";
 
 export default function sitemap() {
   return [

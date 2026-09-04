@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://redesymarketting-web.vercel.app/sitemap.xml
+Sitemap: https://web-ry-m.vercel.app/sitemap.xml
