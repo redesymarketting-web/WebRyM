@@ -13,7 +13,7 @@ const nichos = [
     badge: "Sweet Branding",
     card: "/portadapostres.jpg",
     desc: "Diseño de marca colorido, fotos de producto irresistibles y feeds que endulzan tu audiencia.",
-    heros: ["/dulzuras.jpg", "/crunchiebite.jpg", "/dulzuras.jpg"],
+    heros: ["/dulzurafeed.jpg", "/crunchiefeed.jpg", "/dulzurafeed1.jpg"],
     titulo: "Pastelerías que venden con los ojos",
   },
   {
@@ -23,7 +23,7 @@ const nichos = [
     badge: "Fitness Power",
     card: "/portadadojos.jpg",
     desc: "Volantes de retos, promos de clases y contenido que convierten seguidores en atletas.",
-    heros: ["/ylanflores.jpg", "/ylanflores.jpg", "/ylanflores.jpg"],
+    heros: ["/dojofeed.jpg", "/dojofeed1.jpg", "/dojofeed2.jpg"],
     titulo: "Entrenamiento que inspira disciplina",
   },
   {
@@ -33,7 +33,7 @@ const nichos = [
     badge: "Premium Property",
     card: "/portadarealtor.jpg",
     desc: "Volantes elegantes y publicaciones que posicionan tu marca como la asesora de confianza del mercado.",
-    heros: ["/javiercanizares.jpg", "/doloresrodriguez.jpg", "/javiercanizares.jpg"],
+    heros: ["/realtorfeed.jpg", "/realtorfeed1.jpg", "/realtorfeed2.jpg"],
     titulo: "Propiedades premium, presentación premium",
   },
   {
@@ -43,7 +43,7 @@ const nichos = [
     badge: "Auto Industry",
     card: "/talleresportada.jpg",
     desc: "Identidad gráfica y contenido que transmiten confianza y calidad en tu taller.",
-    heros: ["/dayarey.jpg", "/dayarey.jpg", "/dayarey.jpg"],
+    heros: ["/tallerfeed.jpg", "/tallerfeed1.jpg", "/tallerfeed2.jpg"],
     titulo: "Mecánica de primer nivel, imagen de primer nivel",
   },
 ];
