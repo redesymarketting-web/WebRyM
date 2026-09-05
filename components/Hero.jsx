@@ -12,10 +12,10 @@ import {
 } from "./Doodles";
 
 const panelCards = [
-  { src: "/dulzuras.jpg", label: "@dulzuras", likes: "2.4k", tilt: "-2deg", anim: "animate-floaty", ratio: "aspect-[4/5]" },
-  { src: "/crunchiebite.jpg", label: "Crunchie Bite", likes: "1.8k", tilt: "1deg", anim: "animate-floaty2", ratio: "aspect-[4/5]" },
-  { src: "/javiercanizares.jpg", label: "Javier Cañizares", likes: "3.1k", tilt: "0deg", anim: "animate-floaty2", ratio: "aspect-[9/16]" },
-  { src: "/ylanflores.jpg", label: "Ylan Flores", likes: "2.9k", tilt: "-1deg", anim: "animate-floaty", ratio: "aspect-[9/16]" },
+  { src: "/dulzurahero.jpg", label: "Dulzuras", likes: "2.4k", tilt: "-2deg", anim: "animate-floaty", ratio: "aspect-[4/5]" },
+  { src: "/crunchiehero.jpg", label: "Crunchie Bite", likes: "1.8k", tilt: "1deg", anim: "animate-floaty2", ratio: "aspect-[4/5]" },
+  { src: "/realtorhero.jpg", label: "Real Estate", likes: "3.1k", tilt: "0deg", anim: "animate-floaty2", ratio: "aspect-[9/16]" },
+  { src: "/dojohero.jpg", label: "Dojos & Gym", likes: "2.9k", tilt: "-1deg", anim: "animate-floaty", ratio: "aspect-[9/16]" },
 ];
 
 export default function Hero() {
