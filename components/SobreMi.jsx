@@ -18,13 +18,13 @@ export default function SobreMi() {
             <h2 className="text-[clamp(1.9rem,4vw,3.4rem)] font-black uppercase text-snow">
               Sobre{" "}
               <span className="relative inline-block">
-                mí
+                Nosotros
                 <DoodleScribble className="pointer-events-none absolute -bottom-3 left-0 w-full opacity-70" />
               </span>
             </h2>
             <div className="flex items-center gap-4 text-[clamp(1.5rem,3vw,2.6rem)] font-black uppercase">
               <span className="bg-ember px-4 py-1 text-ink">Maru</span>
-              <span className="bg-volt px-4 py-1 text-ink">Doug</span>
+              <span className="bg-volt px-4 py-1 text-ink">& Doug</span>
             </div>
           </div>
         </Reveal>
@@ -34,8 +34,8 @@ export default function SobreMi() {
           <Reveal>
             <div className="relative mx-auto w-full max-w-md">
               <Image
-                src="/dougymaru.png"
-                alt="Maru y Doug, creadores de Redes y Marketing"
+                src="/nosotros.jpg"
+                alt="Marux y Doug, creadores de Redes y Marketing"
                 width={520}
                 height={620}
                 className="h-[520px] w-full object-cover"
@@ -59,27 +59,52 @@ export default function SobreMi() {
           <Reveal delay={120}>
             <div className="relative flex h-full flex-col">
               <div className="space-y-5 text-lg leading-relaxed text-snow/85">
+                <h3 className="text-xl font-black uppercase text-ember">
+                  ¿Por qué somos <span className="text-volt">naranja</span>?
+                </h3>
                 <p>
-                  A <span className="font-black text-ember">creatividad</span> y{" "}
-                  <span className="font-black text-ember">movimiento</span> se les
-                  añade estrategia: así nace{" "}
-                  <span className="font-black text-volt">Redes y Marketing</span>.
+                  Elegimos este color porque representa la{" "}
+                  <span className="font-black text-ember">alegría</span>, la{" "}
+                  <span className="font-black text-ember">creatividad</span> y el{" "}
+                  <span className="font-black text-ember">optimismo</span>. Es la
+                  chispa diferencial que queremos aportar a través de nuestro
+                  trabajo para cada cliente, seguidor y amigo.
+                </p>
+                <h3 className="text-xl font-black uppercase text-ember">Sobre Nosotros</h3>
+                <p>
+                  Detrás de Redes y Marketting estamos María Eugenia (Marux) y
+                  Douglas Aponte (Doug), esposos unidos por la fe y los sueños.
+                  Dios cruzó nuestros caminos y hoy construimos juntos el
+                  proyecto más importante de nuestras vidas: nuestra familia. Esa
+                  misma complicidad la llevamos a cada cliente, ayudándoles a
+                  destacar con{" "}
+                  <span className="font-black text-volt">autenticidad</span>, sin
+                  importar la competencia.
                 </p>
                 <p>
-                  Somos <span className="font-black text-snow">Maru</span> y{" "}
-                  <span className="font-black text-snow">Doug</span>, un equipo
-                  de diseñadores y estrategas que convierte cada marca en una
-                  presencia digital que conecta, inspira y vende.
+                  <span className="font-black text-snow">Marux</span>: Cristiana,
+                  economista, estratega de redes sociales, asesora de marca,
+                  madre y conferencista.
                 </p>
                 <p>
-                  Diseño, contenido y estrategia en un mismo lugar, trabajando
-                  para que domines tu mercado.
+                  <span className="font-black text-snow">Doug</span>: Cristiano,
+                  ingeniero en sistemas, padre, músico de corazón, diseñador
+                  gráfico y curioso incansable.
+                </p>
+                <p>
+                  Orgullosamente venezolanos, creemos en el poder del
+                  emprendimiento impulsado siempre por la preparación académica y
+                  la cultura, convencidos de que{" "}
+                  <span className="font-black text-volt">
+                    el conocimiento abre todas las puertas
+                  </span>
+                  .
                 </p>
               </div>
 
               <div className="mt-8 grid max-w-md grid-cols-3 gap-4">
                 {[
-                  { n: "50+", l: "Marcas potenciadas" },
+                  { n: "10+", l: "Marcas potenciadas" },
                   { n: "100+", l: "Proyectos diseñados" },
                   { n: "3+", l: "Años de estrategia" },
                 ].map((s) => (
@@ -94,7 +119,7 @@ export default function SobreMi() {
               <div className="mt-auto pt-12 text-right">
                 <DoodleHeart className="pointer-events-none absolute right-14 top-8 hidden h-8 w-8 opacity-60 lg:block" />
                 <p className="font-script text-4xl text-snow md:text-5xl">
-                  Maru y Doug
+                  Marux y Doug
                 </p>
                 <p className="font-script text-3xl text-ember md:text-4xl">
                   Redes y Maketting

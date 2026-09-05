@@ -18,7 +18,7 @@ export default function Navbar() {
   const links = [
     { href: "#que-hacemos", label: "¿Qué hacemos?" },
     { href: "#nicho", label: "Tu nicho" },
-    { href: "#sobre-mi", label: "Sobre mí" },
+    { href: "#sobre-mi", label: "Sobre Nosotros" },
   ];
 
   return (
