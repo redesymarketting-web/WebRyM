@@ -4,6 +4,7 @@ import { useState } from "react";
 import Link from "next/link";
 import Reveal from "./Reveal";
 import PlanesModal from "./PlanesModal";
+import DesarrolloWebModal from "./DesarrolloWebModal";
 import { PLANES_REDES } from "@/lib/planes";
 import { DoodleSpiral, DoodleWave } from "./Doodles";
 
@@ -39,6 +40,7 @@ function CheckIcon() {
 
 export default function QueHacemos() {
   const [isPlanesOpen, setIsPlanesOpen] = useState(false);
+  const [isWebOpen, setIsWebOpen] = useState(false);
 
   const cards = [
     {
@@ -46,6 +48,8 @@ export default function QueHacemos() {
       title: "Desarrollo Web",
       desc: "Landing Pages, Web de Servicios",
       tags: ["Landing Pages", "Web de Servicios"],
+      modalType: "web",
+      cta: "Conoce más",
     },
     {
       icon: <SocialEngagementIcon />,
@@ -53,8 +57,14 @@ export default function QueHacemos() {
       desc: "Diseño, Contenido, Estrategia",
       tags: ["Diseño", "Contenido", "Estrategia"],
       hasPlans: true,
+      cta: "Ver Planes",
     },
   ];
+
+  const openModal = (card) => {
+    if (card.modalType === "web") setIsWebOpen(true);
+    if (card.hasPlans) setIsPlanesOpen(true);
+  };
 
   return (
     <section id="que-hacemos" className="relative overflow-hidden py-24 md:py-32">
@@ -77,11 +87,11 @@ export default function QueHacemos() {
           {cards.map((card, i) => (
             <Reveal key={card.title} delay={i * 120}>
               <article
-                onClick={card.hasPlans ? () => setIsPlanesOpen(true) : undefined}
-                aria-label={card.hasPlans ? `Ver planes de ${card.title}` : undefined}
-                role={card.hasPlans ? "button" : undefined}
+                onClick={() => openModal(card)}
+                aria-label={card.cta ? `${card.cta} sobre ${card.title}` : undefined}
+                role={card.cta ? "button" : undefined}
                 className={`group relative h-full overflow-hidden rounded-[2rem] bg-snow p-8 text-center transition-transform duration-300 hover:-translate-y-2 md:p-12 ${
-                  card.hasPlans ? "cursor-pointer" : ""
+                  card.cta ? "cursor-pointer" : ""
                 }`}
               >
                 <div className="absolute -right-12 -top-12 h-44 w-44 rounded-full bg-ember/10 blur-2xl transition-opacity opacity-0 group-hover:opacity-100" />
@@ -109,12 +119,14 @@ export default function QueHacemos() {
                     ))}
                   </div>
 
-                  {card.hasPlans && (
-                    <div className="mt-7 flex items-center gap-2 rounded-full border border-ember/30 bg-ember/10 px-4 py-2 text-sm font-extrabold uppercase tracking-wide text-ember transition-colors duration-300 group-hover:bg-ember group-hover:text-ink">
-                      Ver Planes
-                      <span className="transition-transform duration-300 group-hover:translate-x-1">
-                        →
-                      </span>
+                  {card.cta && (
+                    <div className="mt-7 flex justify-center">
+                      <div className="inline-flex items-center gap-2 rounded-full border border-ember/30 bg-ember/10 px-4 py-2 text-sm font-extrabold uppercase tracking-wide text-ember transition-colors duration-300 group-hover:bg-ember group-hover:text-ink">
+                        {card.cta}
+                        <span className="transition-transform duration-300 group-hover:translate-x-1">
+                          →
+                        </span>
+                      </div>
                     </div>
                   )}
                 </div>
@@ -145,6 +157,11 @@ export default function QueHacemos() {
         title="Planes de Gestión de Redes"
         subtitle="Elige el plan que mejor se adapte a tu marca y empieza a crecer con estrategia."
         planes={PLANES_REDES}
+      />
+
+      <DesarrolloWebModal
+        open={isWebOpen}
+        onClose={() => setIsWebOpen(false)}
       />
     </section>
   );
