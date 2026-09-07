@@ -3,6 +3,8 @@
 import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
 import Reveal from "./Reveal";
+import ClientesModal from "./ClientesModal";
+import { CLIENTES_NICHOS } from "@/lib/clientesNichos";
 import { DoodleSpiral, DoodleCircle, DoodleWave } from "./Doodles";
 
 const nichos = [
@@ -115,6 +117,7 @@ function FeedMockup({ items }) {
 
 export default function Nichos() {
   const [activo, setActivo] = useState(0);
+  const [isClientesOpen, setIsClientesOpen] = useState(false);
   const current = nichos[activo];
   const areaRef = useRef(null);
 
@@ -232,11 +235,36 @@ export default function Nichos() {
                 </div>
               </div>
 
-              <FeedMockup items={current.heros} />
+              <div>
+                <FeedMockup items={current.heros} />
+                <div className="mt-6 flex justify-center">
+                  <button
+                    type="button"
+                    onClick={() => setIsClientesOpen(true)}
+                    className="group inline-flex items-center gap-2 rounded-full border-2 border-ember/40 bg-ember/10 px-5 py-2.5 text-sm font-extrabold uppercase tracking-wide text-ember transition-colors duration-300 hover:bg-ember hover:text-ink"
+                  >
+                    Clientes que confían
+                    <span className="transition-transform duration-300 group-hover:translate-x-1">
+                      →
+                    </span>
+                  </button>
+                </div>
+              </div>
             </div>
           </div>
         </Reveal>
       </div>
+
+      <ClientesModal
+        open={isClientesOpen}
+        onClose={() => setIsClientesOpen(false)}
+        nicho={{
+          nombre: current.nombre,
+          primary: current.primary,
+          badge: current.badge,
+        }}
+        clientes={CLIENTES_NICHOS[current.id] ?? []}
+      />
     </section>
   );
 }
