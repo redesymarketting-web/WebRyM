@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { whatsappHref } from "@/lib/planes";
+import { whatsappHref, PLAN_PERSONALIZADO_TEXT } from "@/lib/planes";
 
 function PaintIcon({ className }) {
   return (
@@ -208,6 +208,29 @@ export default function PlanesModal({ open, onClose, title, subtitle, planes }) 
             {planes.map((plan) => (
               <PlanCard key={plan.id} plan={plan} />
             ))}
+          </div>
+
+          <div className="mt-8 rounded-2xl bg-ink px-6 py-8 text-center sm:px-10">
+            <p className="text-lg font-black uppercase tracking-wide text-snow">
+              ¿No encuentras un plan{" "}
+              <span className="text-volt">para tu marca</span>?
+            </p>
+            <p className="mx-auto mt-2 max-w-md text-sm font-medium text-snow/70">
+              Cuéntanos tu dolor y diseñamos un plan personalizado que se adapte
+              a tu necesidad.
+            </p>
+            <a
+              href={whatsappHref(PLAN_PERSONALIZADO_TEXT)}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Consultar plan personalizado por WhatsApp"
+              className="group mt-6 inline-flex items-center gap-3 rounded-full bg-ember px-8 py-3.5 text-sm font-black uppercase tracking-wide text-ink transition-all hover:scale-105 hover:bg-volt glow-ember-soft"
+            >
+              Consultar plan personalizado
+              <span className="transition-transform group-hover:translate-x-1">
+                →
+              </span>
+            </a>
           </div>
         </div>
       </div>

@@ -49,7 +49,7 @@ export default function Footer() {
         <Reveal delay={120}>
           <div className="mt-14 flex justify-center">
             <Link
-              href="https://wa.me/584125012969?text=Hola%20Redes%20y%20Marketing%2C%20quiero%20escalar%20mi%20marca"
+              href="https://wa.me/584125012969?text=Hola%20Redes%20y%20Marketting%2C%20quiero%20escalar%20mi%20marca"
               target="_blank"
               rel="noopener noreferrer"
               aria-label="Iniciar asesoría inmediata por WhatsApp"
