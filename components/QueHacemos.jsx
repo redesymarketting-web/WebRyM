@@ -1,7 +1,10 @@
 "use client";
 
+import { useState } from "react";
 import Link from "next/link";
 import Reveal from "./Reveal";
+import PlanesModal from "./PlanesModal";
+import { PLANES_REDES } from "@/lib/planes";
 import { DoodleSpiral, DoodleWave } from "./Doodles";
 
 function PcTabletIcon() {
@@ -35,6 +38,8 @@ function CheckIcon() {
 }
 
 export default function QueHacemos() {
+  const [isPlanesOpen, setIsPlanesOpen] = useState(false);
+
   const cards = [
     {
       icon: <PcTabletIcon />,
@@ -47,6 +52,7 @@ export default function QueHacemos() {
       title: "Gestión de Redes",
       desc: "Diseño, Contenido, Estrategia",
       tags: ["Diseño", "Contenido", "Estrategia"],
+      hasPlans: true,
     },
   ];
 
@@ -70,7 +76,14 @@ export default function QueHacemos() {
         <div className="grid gap-6 md:grid-cols-2 md:gap-8">
           {cards.map((card, i) => (
             <Reveal key={card.title} delay={i * 120}>
-              <article className="group relative h-full overflow-hidden rounded-[2rem] bg-snow p-8 text-center transition-transform duration-300 hover:-translate-y-2 md:p-12">
+              <article
+                onClick={card.hasPlans ? () => setIsPlanesOpen(true) : undefined}
+                aria-label={card.hasPlans ? `Ver planes de ${card.title}` : undefined}
+                role={card.hasPlans ? "button" : undefined}
+                className={`group relative h-full overflow-hidden rounded-[2rem] bg-snow p-8 text-center transition-transform duration-300 hover:-translate-y-2 md:p-12 ${
+                  card.hasPlans ? "cursor-pointer" : ""
+                }`}
+              >
                 <div className="absolute -right-12 -top-12 h-44 w-44 rounded-full bg-ember/10 blur-2xl transition-opacity opacity-0 group-hover:opacity-100" />
 
                 <div className="relative">
@@ -95,6 +108,15 @@ export default function QueHacemos() {
                       </span>
                     ))}
                   </div>
+
+                  {card.hasPlans && (
+                    <div className="mt-7 flex items-center gap-2 rounded-full border border-ember/30 bg-ember/10 px-4 py-2 text-sm font-extrabold uppercase tracking-wide text-ember transition-colors duration-300 group-hover:bg-ember group-hover:text-ink">
+                      Ver Planes
+                      <span className="transition-transform duration-300 group-hover:translate-x-1">
+                        →
+                      </span>
+                    </div>
+                  )}
                 </div>
               </article>
             </Reveal>
@@ -116,6 +138,14 @@ export default function QueHacemos() {
           </div>
         </Reveal>
       </div>
+
+      <PlanesModal
+        open={isPlanesOpen}
+        onClose={() => setIsPlanesOpen(false)}
+        title="Planes de Gestión de Redes"
+        subtitle="Elige el plan que mejor se adapte a tu marca y empieza a crecer con estrategia."
+        planes={PLANES_REDES}
+      />
     </section>
   );
 }
