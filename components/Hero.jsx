@@ -104,7 +104,7 @@ export default function Hero() {
           {/* Notificación flotante */}
           <div className="animate-floaty2 absolute -right-4 -top-6 rounded-2xl border border-white/15 bg-ink/90 px-4 py-3 backdrop-blur-md glow-ember-soft">
             <p className="text-xs font-extrabold text-volt">+3.2k seguidores · hoy</p>
-            <p className="text-[11px] text-snow/70">Estrategia Redes y Marketing</p>
+            <p className="text-[11px] text-snow/70">Estrategia Redes y Marketting</p>
           </div>
         </div>
       </div>

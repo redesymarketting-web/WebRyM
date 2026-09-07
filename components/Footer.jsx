@@ -74,21 +74,21 @@ export default function Footer() {
           <div className="flex items-center gap-3">
             <Image
               src="/logonew.png"
-              alt="Redes y Marketing"
+              alt="Redes y Marketting"
               width={56}
               height={56}
               className="h-12 w-12 rounded-2xl"
             />
             <div>
-              <p className="font-display text-xl font-black text-snow">Redes y Marketing</p>
+              <p className="font-display text-xl font-black text-snow">Redes y Marketting</p>
               <p className="text-sm font-semibold text-ember">@redesymarketting</p>
             </div>
           </div>
 
           <div className="flex items-center gap-4">
             {[
-              { href: "https://instagram.com/redesymarketting", label: "Instagram de Redes y Marketing", Icon: InstagramIcon },
-              { href: "https://wa.me/584125012969", label: "WhatsApp de Redes y Marketing", Icon: WhatsAppIcon },
+              { href: "https://instagram.com/redesymarketting", label: "Instagram de Redes y Marketting", Icon: InstagramIcon },
+              { href: "https://wa.me/584125012969", label: "WhatsApp de Redes y Marketting", Icon: WhatsAppIcon },
             ].map(({ href, label, Icon }) => (
               <Link
                 key={href}
@@ -107,7 +107,7 @@ export default function Footer() {
 
       <div className="border-t border-white/10 py-6">
         <div className="mx-auto flex max-w-7xl flex-col items-center justify-between gap-3 px-5 text-xs text-snow/40 sm:flex-row lg:px-8">
-          <p>© {year} Redes y Marketing. Todos los derechos reservados.</p>
+          <p>© {year} Redes y Marketting. Todos los derechos reservados.</p>
           <p className="flex items-center gap-1.5">
             Hecho con <span className="text-ember">♥</span> y estrategia digital
           </p>

@@ -101,7 +101,7 @@ function FeedMockup({ items }) {
           <div key={it + i} className="relative aspect-square overflow-hidden rounded-xl">
             <Image
               src={it}
-              alt={`Post de feed para el nicho ${nichos.find((n) => n.heros.includes(it))?.nombre ?? "Redes y Marketing"}`}
+              alt={`Post de feed para el nicho ${nichos.find((n) => n.heros.includes(it))?.nombre ?? "Redes y Marketting"}`}
               fill
               sizes="160px"
               className="object-cover transition-transform duration-700 hover:scale-110"

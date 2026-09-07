@@ -1,6 +1,6 @@
-# Redes y Marketing — Página Web
+# Redes y Marketting — Página Web
 
-Landing page de marketing digital de alto impacto para la marca **Redes y Marketing**.
+Landing page de marketing digital de alto impacto para la marca **Redes y Marketting**.
 Construida con **Next.js 14 (App Router) + Tailwind CSS**, con **SEO optimizado** (SSR, metadatos, sitemap, robots.txt y datos estructurados JSON-LD).
 
 ## Paleta y tipografía

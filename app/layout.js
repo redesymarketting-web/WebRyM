@@ -21,11 +21,11 @@ export const metadata = {
   metadataBase: new URL(SITE_URL),
   title: {
     default:
-      "Redes y Marketing | Potenciamos tu presencia digital con diseño y estrategia",
-    template: "%s | Redes y Marketing",
+      "Redes y Marketting | Potenciamos tu presencia digital con diseño y estrategia",
+    template: "%s | Redes y Marketting",
   },
   description:
-    "Agencia de marketing digital y desarrollo web. Creamos landing pages, webs de servicios y gestionamos tus redes sociales con estrategia y diseño de alto impacto. Impulsa tu marca con Redes y Marketing.",
+    "Agencia de marketing digital y desarrollo web. Creamos landing pages, webs de servicios y gestionamos tus redes sociales con estrategia y diseño de alto impacto. Impulsa tu marca con Redes y Marketting.",
   keywords: [
     "marketing digital",
     "gestión de redes sociales",
@@ -38,16 +38,16 @@ export const metadata = {
     "redes y marketing",
     "branding",
   ],
-  authors: [{ name: "Redes y Marketing", url: SITE_URL }],
-  creator: "Redes y Marketing",
-  publisher: "Redes y Marketing",
-  applicationName: "Redes y Marketing",
+  authors: [{ name: "Redes y Marketting", url: SITE_URL }],
+  creator: "Redes y Marketting",
+  publisher: "Redes y Marketting",
+  applicationName: "Redes y Marketting",
   openGraph: {
     type: "website",
     locale: "es_VE",
     url: SITE_URL,
-    siteName: "Redes y Marketing",
-    title: "Redes y Marketing | Potenciamos tu presencia digital",
+    siteName: "Redes y Marketting",
+    title: "Redes y Marketting | Potenciamos tu presencia digital",
     description:
       "Potenciamos tu presencia digital con diseño y estrategia. Desarrollo web, gestión de redes sociales y campañas de alto impacto.",
     images: [
@@ -55,13 +55,13 @@ export const metadata = {
         url: "/logonew.png",
         width: 1200,
         height: 630,
-        alt: "Logotipo de Redes y Marketing",
+        alt: "Logotipo de Redes y Marketting",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Redes y Marketing | Presencia digital con diseño y estrategia",
+    title: "Redes y Marketting | Presencia digital con diseño y estrategia",
     description:
       "Desarrollo web, gestión de redes sociales y estrategia digital de alto impacto.",
     images: ["/logonew.png"],
@@ -113,14 +113,14 @@ export default function RootLayout({ children }) {
             __html: JSON.stringify({
               "@context": "https://schema.org",
               "@type": "WebSite",
-              name: "Redes y Marketing",
+              name: "Redes y Marketting",
               url: SITE_URL,
               description:
                 "Agencia de marketing digital y desarrollo web. Potenciamos tu presencia digital con diseño y estrategia.",
               inLanguage: "es",
               publisher: {
                 "@type": "Organization",
-                name: "Redes y Marketing",
+                name: "Redes y Marketting",
                 url: SITE_URL,
                 logo: {
                   "@type": "ImageObject",
@@ -133,7 +133,7 @@ export default function RootLayout({ children }) {
               author: {
                 "@type": "Person",
                 name: "Alan Flores",
-                jobTitle: "Creador de Redes y Marketing",
+                jobTitle: "Creador de Redes y Marketting",
               },
             }),
           }}

@@ -182,7 +182,7 @@ export default function DesarrolloWebModal({ open, onClose }) {
                 Proyectos <span className="text-ember">publicados</span>
               </h4>
               <p className="text-sm font-medium text-ink/50">
-                Marcas que ya confían en Redes y Marketing para su presencia web.
+                Marcas que ya confían en Redes y Marketting para su presencia web.
               </p>
             </div>
 
@@ -190,16 +190,16 @@ export default function DesarrolloWebModal({ open, onClose }) {
               {PORTAFOLIO_WEB.map((proyecto) => (
                 <article
                   key={proyecto.id}
-                  className="flex h-full flex-col rounded-2xl bg-ink p-6"
+                  className="flex h-full flex-col rounded-2xl border-2 border-ember bg-white p-6 shadow-[0_10px_30px_rgba(2,2,2,0.06)]"
                 >
-                  <p className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-volt">
-                    <span className="h-1.5 w-1.5 rounded-full bg-volt" />
+                  <p className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-ember">
+                    <span className="h-1.5 w-1.5 rounded-full bg-ember" />
                     Sitio en vivo
                   </p>
-                  <h5 className="mt-2 text-xl font-black text-snow">
+                  <h5 className="mt-2 text-xl font-black text-ink">
                     {proyecto.nombre}
                   </h5>
-                  <p className="mt-2 text-sm leading-relaxed text-snow/70">
+                  <p className="mt-2 text-sm leading-relaxed text-ink/70">
                     {proyecto.descripcion}
                   </p>
                   <a

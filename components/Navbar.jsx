@@ -33,7 +33,7 @@ export default function Navbar() {
         <Link href="#inicio" aria-label="Ir al inicio">
           <Image
             src="/logonew.png"
-            alt="Redes y Marketing"
+            alt="Redes y Marketting"
             width={120}
             height={48}
             priority

@@ -35,7 +35,7 @@ export default function SobreMi() {
             <div className="relative mx-auto w-full max-w-md">
               <Image
                 src="/nosotros.jpg"
-                alt="Marux y Doug, creadores de Redes y Marketing"
+                alt="Marux y Doug, creadores de Redes y Marketting"
                 width={520}
                 height={620}
                 className="h-[520px] w-full object-cover"
@@ -46,7 +46,7 @@ export default function SobreMi() {
               <div className="animate-floaty absolute -bottom-8 -right-8 h-28 w-28 md:h-32 md:w-32">
                 <Image
                   src="/logonew.png"
-                  alt="Isologo de Redes y Marketing"
+                  alt="Isologo de Redes y Marketting"
                   width={128}
                   height={128}
                   className="h-full w-full object-contain"
@@ -122,7 +122,7 @@ export default function SobreMi() {
                   Marux y Doug
                 </p>
                 <p className="font-script text-3xl text-ember md:text-4xl">
-                  Redes y Maketting
+                  Redes y Marketting
                 </p>
                 <DoodleScribble className="pointer-events-none ml-auto mt-1 w-32 md:w-44" />
                 <p className="font-script mt-2 text-3xl text-volt md:text-4xl">
