@@ -35,6 +35,67 @@ npm start         # servir el build de producción
 
 Todas las imágenes viven en `public/` y se referencian desde el código con `/nombre.jpg`. Para reemplazar una imagen, solo reemplaza el archivo en `public/` con el mismo nombre.
 
+## Panel administrativo
+
+El proyecto incluye un panel privado en **`/admin`** conectado a Supabase. La
+página pública no depende de estas credenciales para renderizar.
+
+### 1. Preparar Supabase
+
+1. Crea el proyecto **BDWebRyM** en Supabase.
+2. En **SQL Editor**, ejecuta completo:
+   `supabase/migrations/20261029_esquema_inicial.sql`
+3. Luego ejecuta `supabase/seed.sql` para cargar el contenido inicial.
+4. En **Project Settings → API**, copia la URL y la `anon key`.
+
+### 2. Variables de entorno
+
+Copia `.env.example` a `.env.local` y completa:
+
+```env
+NEXT_PUBLIC_SUPABASE_URL=https://TU-PROYECTO.supabase.co
+NEXT_PUBLIC_SUPABASE_ANON_KEY=TU_ANON_KEY
+```
+
+En Vercel agrega esas dos variables y vuelve a desplegar.
+
+### 3. Crear el administrador
+
+Opción A: desde **Authentication → Users**, crea el usuario
+`redesymarketting@gmail.com`, copia su UUID y regístralo en la tabla
+`administradores` con `activo = true`.
+
+Opción B: usa el script local. Agrega también en `.env.local`:
+
+```env
+SUPABASE_SERVICE_ROLE_KEY=TU_SERVICE_ROLE_KEY
+ADMIN_EMAIL=redesymarketting@gmail.com
+ADMIN_PASSWORD=una-contrasena-segura
+```
+
+Y ejecuta:
+
+```bash
+npm run crear-admin
+```
+
+El script crea (o actualiza) el usuario en Supabase Auth y lo registra en
+`administradores`. La `service_role key` es solo para este script local: nunca
+la agregues a Vercel ni la expongas en el cliente.
+
+### 4. Ingresar
+
+Abre **`/admin/iniciar-sesion`** y usa el correo y la contraseña del
+administrador. Desde el panel puedes editar:
+
+- Inicio (Hero y tarjetas flotantes).
+- Qué Hacemos (planes de redes).
+- Nichos (tarjetas, feed de Instagram y clientes).
+- Sobre Nosotros.
+
+Las imágenes se suben al bucket público **`imagenes`** de Supabase Storage. La
+escritura está protegida por RLS para administradores autenticados.
+
 ## Despliegue
 
 ### 1. Crear el repositorio en GitHub

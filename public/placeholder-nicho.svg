@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 800" role="img" aria-label="Imagen pendiente por reemplazar">
+  <defs>
+    <linearGradient id="fondo" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#020202"/>
+      <stop offset="55%" stop-color="#1b0d05"/>
+      <stop offset="100%" stop-color="#020202"/>
+    </linearGradient>
+    <radialGradient id="brillo" cx="50%" cy="45%" r="60%">
+      <stop offset="0%" stop-color="#f7651c" stop-opacity=".55"/>
+      <stop offset="70%" stop-color="#f7651c" stop-opacity=".08"/>
+      <stop offset="100%" stop-color="#f7651c" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="800" height="800" fill="url(#fondo)"/>
+  <rect width="800" height="800" fill="url(#brillo)"/>
+  <g fill="none" stroke="#ffec01" stroke-width="10" stroke-linecap="round" stroke-linejoin="round" opacity=".9">
+    <path d="M330 470h140M350 470l14-92h92l14 92"/>
+    <path d="M376 378V330h48v48"/>
+    <path d="M300 250c60-36 140-36 200 0"/>
+  </g>
+  <text x="400" y="590" fill="#fefcfd" font-family="Montserrat, Arial, sans-serif" font-size="44" font-weight="800" text-anchor="middle" letter-spacing="4">IMAGEN PENDIENTE</text>
+  <text x="400" y="638" fill="#f7651c" font-family="Montserrat, Arial, sans-serif" font-size="24" font-weight="700" text-anchor="middle" letter-spacing="3">REEMPLAZAR DESDE /ADMIN</text>
+</svg>
