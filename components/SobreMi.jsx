@@ -2,9 +2,25 @@
 
 import Image from "next/image";
 import Reveal from "./Reveal";
+import TextoEnriquecido from "./TextoEnriquecido";
 import { DoodleSpiral, DoodleHeart, DoodleCircle, DoodleScribble } from "./Doodles";
 
-export default function SobreMi() {
+export default function SobreMi({ contenido }) {
+  const contadores = [
+    {
+      valor: contenido?.valor_marcas_potenciadas || "—",
+      etiqueta: "Marcas potenciadas",
+    },
+    {
+      valor: contenido?.valor_proyectos_disenados || "—",
+      etiqueta: "Proyectos diseñados",
+    },
+    {
+      valor: contenido?.valor_anos_estrategia || "—",
+      etiqueta: "Años de estrategia",
+    },
+  ];
+
   return (
     <section id="sobre-mi" className="relative overflow-hidden py-24 md:py-32">
       <DoodleSpiral className="pointer-events-none absolute right-[10%] top-16 hidden h-14 w-14 opacity-60 lg:block" />
@@ -34,7 +50,7 @@ export default function SobreMi() {
           <Reveal>
             <div className="relative mx-auto w-full max-w-md">
               <Image
-                src="/nosotros.jpg"
+                src={contenido?.url_imagen_pareja || "/nosotros.jpg"}
                 alt="Marux y Doug, creadores de Redes y Marketting"
                 width={520}
                 height={620}
@@ -45,7 +61,7 @@ export default function SobreMi() {
               {/* Isologo flotante */}
               <div className="animate-floaty absolute -bottom-8 -right-8 h-28 w-28 md:h-32 md:w-32">
                 <Image
-                  src="/logonew.png"
+                  src={contenido?.url_isologo_flotante || "/logonew.png"}
                   alt="Isologo de Redes y Marketting"
                   width={128}
                   height={128}
@@ -60,57 +76,65 @@ export default function SobreMi() {
             <div className="relative flex h-full flex-col">
               <div className="space-y-5 text-lg leading-relaxed text-snow/85">
                 <h3 className="text-xl font-black uppercase text-ember">
-                  ¿Por qué somos <span className="text-volt">naranja</span>?
+                  <TextoEnriquecido
+                    texto={contenido?.titulo_porque_naranja}
+                    claseNaranja="text-ember"
+                    claseAmarillo="text-volt"
+                  />
                 </h3>
                 <p>
-                  Elegimos este color porque representa la{" "}
-                  <span className="font-black text-ember">alegría</span>, la{" "}
-                  <span className="font-black text-ember">creatividad</span> y el{" "}
-                  <span className="font-black text-ember">optimismo</span>. Es la
-                  chispa diferencial que queremos aportar a través de nuestro
-                  trabajo para cada cliente, seguidor y amigo.
+                  <TextoEnriquecido
+                    texto={contenido?.texto_porque_naranja}
+                    className="whitespace-pre-line"
+                  />
                 </p>
-                <h3 className="text-xl font-black uppercase text-ember">Sobre Nosotros</h3>
+                <h3 className="text-xl font-black uppercase text-ember">
+                  <TextoEnriquecido
+                    texto={contenido?.titulo_sobre_nosotros}
+                    claseNaranja="text-ember"
+                    claseAmarillo="text-volt"
+                  />
+                </h3>
                 <p>
-                  Detrás de Redes y Marketting estamos María Eugenia (Marux) y
-                  Douglas Aponte (Doug), esposos unidos por la fe y los sueños.
-                  Dios cruzó nuestros caminos y hoy construimos juntos el
-                  proyecto más importante de nuestras vidas: nuestra familia. Esa
-                  misma complicidad la llevamos a cada cliente, ayudándoles a
-                  destacar con{" "}
-                  <span className="font-black text-volt">autenticidad</span>, sin
-                  importar la competencia.
-                </p>
-                <p>
-                  <span className="font-black text-snow">Marux</span>: Cristiana,
-                  economista, estratega de redes sociales, asesora de marca,
-                  madre y conferencista.
+                  <TextoEnriquecido
+                    texto={contenido?.texto_sobre_nosotros}
+                    className="whitespace-pre-line"
+                  />
                 </p>
                 <p>
-                  <span className="font-black text-snow">Doug</span>: Cristiano,
-                  ingeniero en sistemas, padre, músico de corazón, diseñador
-                  gráfico y curioso incansable.
+                  <span className="font-black text-snow">Marux</span>:{" "}
+                  <TextoEnriquecido
+                    texto={contenido?.descripcion_marux}
+                    className="whitespace-pre-line"
+                  />
                 </p>
                 <p>
-                  Orgullosamente venezolanos, creemos en el poder del
-                  emprendimiento impulsado siempre por la preparación académica y
-                  la cultura, convencidos de que{" "}
-                  <span className="font-black text-volt">
-                    el conocimiento abre todas las puertas
-                  </span>
-                  .
+                  <span className="font-black text-snow">Doug</span>:{" "}
+                  <TextoEnriquecido
+                    texto={contenido?.descripcion_doug}
+                    className="whitespace-pre-line"
+                  />
+                </p>
+                <p>
+                  <TextoEnriquecido
+                    texto={contenido?.texto_enfasis_venezolanos}
+                    className="whitespace-pre-line"
+                  />
                 </p>
               </div>
 
               <div className="mt-8 grid max-w-md grid-cols-3 gap-4">
-                {[
-                  { n: "10+", l: "Marcas potenciadas" },
-                  { n: "100+", l: "Proyectos diseñados" },
-                  { n: "3+", l: "Años de estrategia" },
-                ].map((s) => (
-                  <div key={s.l} className="rounded-2xl border border-white/15 bg-white/[0.04] p-4 text-center">
-                    <p className="text-2xl font-black text-ember">{s.n}</p>
-                    <p className="mt-1 text-xs font-medium text-snow/70">{s.l}</p>
+                {contadores.map((contador) => (
+                  <div
+                    key={contador.etiqueta}
+                    className="rounded-2xl border border-white/15 bg-white/[0.04] p-4 text-center"
+                  >
+                    <p className="text-2xl font-black text-ember">
+                      {contador.valor}
+                    </p>
+                    <p className="mt-1 text-xs font-medium text-snow/70">
+                      {contador.etiqueta}
+                    </p>
                   </div>
                 ))}
               </div>
@@ -119,14 +143,14 @@ export default function SobreMi() {
               <div className="mt-auto pt-12 text-right">
                 <DoodleHeart className="pointer-events-none absolute right-14 top-8 hidden h-8 w-8 opacity-60 lg:block" />
                 <p className="font-script text-4xl text-snow md:text-5xl">
-                  Marux y Doug
+                  {contenido?.firma_texto}
                 </p>
                 <p className="font-script text-3xl text-ember md:text-4xl">
-                  Redes y Marketting
+                  {contenido?.firma_subtitulo}
                 </p>
                 <DoodleScribble className="pointer-events-none ml-auto mt-1 w-32 md:w-44" />
                 <p className="font-script mt-2 text-3xl text-volt md:text-4xl">
-                  Somos Diferentes para Ti
+                  {contenido?.slogan}
                 </p>
               </div>
             </div>

@@ -3,6 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
+import TextoEnriquecido from "./TextoEnriquecido";
 import {
   DoodleSpiral,
   DoodleWavyUnderline,
@@ -11,16 +12,55 @@ import {
   DoodleScribble,
 } from "./Doodles";
 
-const panelCards = [
-  { src: "/dulzurahero.jpg", label: "Dulzuras", likes: "2.4k", tilt: "-2deg", anim: "animate-floaty", ratio: "aspect-[4/5]" },
-  { src: "/crunchiehero.jpg", label: "Crunchie Bite", likes: "1.8k", tilt: "1deg", anim: "animate-floaty2", ratio: "aspect-[4/5]" },
-  { src: "/realtorhero.jpg", label: "Real Estate", likes: "3.1k", tilt: "0deg", anim: "animate-floaty2", ratio: "aspect-[4/5]" },
-  { src: "/dojohero.jpg", label: "Dojos & Gym", likes: "2.9k", tilt: "-1deg", anim: "animate-floaty", ratio: "aspect-[4/5]" },
+const ESTILOS_TARJETA = [
+  { tilt: "-2deg", anim: "animate-floaty" },
+  { tilt: "1deg", anim: "animate-floaty2" },
+  { tilt: "0deg", anim: "animate-floaty2" },
+  { tilt: "-1deg", anim: "animate-floaty" },
 ];
 
-export default function Hero() {
+function BotonEnlace({ href, className, children }) {
+  if (!href) return null;
+
+  if (/^https?:\/\//i.test(href)) {
+    return (
+      <a
+        href={href}
+        target="_blank"
+        rel="noopener noreferrer"
+        className={className}
+      >
+        {children}
+      </a>
+    );
+  }
+
+  if (/^(mailto:|tel:)/i.test(href)) {
+    return (
+      <a href={href} className={className}>
+        {children}
+      </a>
+    );
+  }
+
+  return (
+    <Link href={href} className={className}>
+      {children}
+    </Link>
+  );
+}
+
+export default function Hero({ seccion, tarjetas = [] }) {
   const [loaded, setLoaded] = useState(false);
   useEffect(() => setLoaded(true), []);
+
+  const tituloLineas = String(seccion?.titulo_principal || "")
+    .split(/\r?\n/)
+    .filter((linea) => linea.trim() !== "");
+
+  const tarjetasHero = Array.isArray(tarjetas)
+    ? tarjetas.filter((tarjeta) => tarjeta?.url_imagen)
+    : [];
 
   return (
     <section id="inicio" className="relative overflow-hidden pb-24 pt-28 md:pb-32 md:pt-40">
@@ -35,70 +75,102 @@ export default function Hero() {
       <div className="mx-auto grid max-w-7xl items-center gap-16 px-5 lg:grid-cols-[1.05fr_0.95fr] lg:px-8">
         {/* Texto */}
         <div className={`transition-all duration-1000 ${loaded ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}>
-          <span className="mb-6 inline-flex items-center gap-2 rounded-full bg-ember px-4 py-2 text-xs font-extrabold uppercase tracking-widest text-ink">
-            Marketing Digital · Diseño · Estrategia
-          </span>
+          {seccion?.etiqueta_superior ? (
+            <span className="mb-6 inline-flex items-center gap-2 rounded-full bg-ember px-4 py-2 text-xs font-extrabold uppercase tracking-widest text-ink">
+              {seccion.etiqueta_superior}
+            </span>
+          ) : null}
 
           <h1 className="text-[clamp(2.1rem,4.5vw,4.25rem)] font-black uppercase leading-[1.02] tracking-tight text-snow">
-            Potenciamos tu
-            <span className="relative mt-1 block text-ember">
-              presencia
-              <DoodleWavyUnderline className="pointer-events-none absolute -bottom-2 left-0 w-[90%] opacity-80" />
-            </span>
-            <span className="block text-snow">digital con</span>
-            diseño y{" "}
-            <span className="relative inline-block">
-              <span className="text-volt">estrategia</span>
-              <DoodleScribble className="pointer-events-none absolute -bottom-3 left-0 w-[70%]" />
-            </span>
+            {tituloLineas.map((linea, i) => {
+              const tieneNaranja = /\*\*[^*]+\*\*/.test(linea);
+              const tieneAmarillo = /__[^_]+__/.test(linea);
+
+              return (
+                <span
+                  key={`${linea}-${i}`}
+                  className={i === 0 ? "relative block" : "relative mt-1 block"}
+                >
+                  <TextoEnriquecido texto={linea} />
+                  {tieneNaranja ? (
+                    <DoodleWavyUnderline className="pointer-events-none absolute -bottom-2 left-0 w-[90%] opacity-80" />
+                  ) : null}
+                  {tieneAmarillo ? (
+                    <DoodleScribble className="pointer-events-none absolute -bottom-3 left-0 w-[70%]" />
+                  ) : null}
+                </span>
+              );
+            })}
           </h1>
 
+          {seccion?.texto_descripcion ? (
+            <p className="mt-6 max-w-xl text-base font-medium leading-relaxed text-snow/75 md:text-lg">
+              <TextoEnriquecido
+                texto={seccion.texto_descripcion}
+                className="whitespace-pre-line"
+              />
+            </p>
+          ) : null}
+
           <div className="mt-10 flex flex-wrap items-center gap-4">
-            <Link
-              href="#contacto"
-              className="group inline-flex items-center gap-2 rounded-full bg-ember px-8 py-4 text-base font-extrabold uppercase tracking-wide text-ink transition-all hover:scale-105 hover:bg-volt glow-ember"
-            >
-              Quiero escalar mi marca
-              <span className="transition-transform group-hover:translate-x-1">→</span>
-            </Link>
-            <Link
-              href="#nicho"
-              className="inline-flex items-center gap-2 rounded-full border-2 border-snow/25 px-8 py-4 text-base font-bold text-snow transition-all hover:border-volt hover:text-volt"
-            >
-              Ver tu nicho
-            </Link>
+            {seccion?.texto_boton_principal ? (
+              <BotonEnlace
+                href={seccion?.url_boton_principal || "#contacto"}
+                className="group inline-flex items-center gap-2 rounded-full bg-ember px-8 py-4 text-base font-extrabold uppercase tracking-wide text-ink transition-all hover:scale-105 hover:bg-volt glow-ember"
+              >
+                {seccion.texto_boton_principal}
+                <span className="transition-transform group-hover:translate-x-1">→</span>
+              </BotonEnlace>
+            ) : null}
+            {seccion?.texto_boton_secundario ? (
+              <BotonEnlace
+                href={seccion?.url_boton_secundario || "#nicho"}
+                className="inline-flex items-center gap-2 rounded-full border-2 border-snow/25 px-8 py-4 text-base font-bold text-snow transition-all hover:border-volt hover:text-volt"
+              >
+                {seccion.texto_boton_secundario}
+              </BotonEnlace>
+            ) : null}
           </div>
         </div>
 
         {/* Panel ordenado de cards */}
         <div className={`relative mx-auto w-full max-w-lg transition-all duration-1000 delay-200 ${loaded ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}>
           <div className="grid grid-cols-2 gap-4">
-            {panelCards.map((card, i) => (
-              <div
-                key={card.src + i}
-                className={`${card.anim} glow-ember-soft overflow-hidden rounded-2xl border border-white/15 bg-ink shadow-xl`}
-                style={{ transform: `rotate(${card.tilt})`, animationDelay: `${i * 0.8}s` }}
-              >
-                <div className="flex items-center gap-2 px-3 py-2">
-                  <span className="flex h-5 w-5 items-center justify-center rounded-full bg-gradient-to-tr from-ember to-volt text-[9px] font-black text-ink">
-                    R
-                  </span>
-                  <span className="text-[11px] font-semibold text-snow">{card.label}</span>
+            {tarjetasHero.map((card, i) => {
+              const estilo = ESTILOS_TARJETA[i % ESTILOS_TARJETA.length];
+
+              return (
+                <div
+                  key={card.id || `${card.url_imagen}-${i}`}
+                  className={`${estilo.anim} glow-ember-soft overflow-hidden rounded-2xl border border-white/15 bg-ink shadow-xl`}
+                  style={{
+                    transform: `rotate(${estilo.tilt})`,
+                    animationDelay: `${i * 0.8}s`,
+                  }}
+                >
+                  <div className="flex items-center gap-2 px-3 py-2">
+                    <span className="flex h-5 w-5 items-center justify-center rounded-full bg-gradient-to-tr from-ember to-volt text-[9px] font-black text-ink">
+                      R
+                    </span>
+                    <span className="text-[11px] font-semibold text-snow">
+                      {card.nombre_marca}
+                    </span>
+                  </div>
+                  <Image
+                    src={card.url_imagen}
+                    alt={`Post de redes sociales de ${card.nombre_marca || "la marca"}`}
+                    width={240}
+                    height={300}
+                    className="aspect-[4/5] w-full object-cover"
+                  />
+                  <div className="flex items-center gap-3 px-3 py-2 text-[11px] text-snow/80">
+                    <span>♥ {card.megustas || "0"}</span>
+                    <span>💬 {card.comentarios || "0"}</span>
+                    <span className="ml-auto text-volt">↗</span>
+                  </div>
                 </div>
-                <Image
-                  src={card.src}
-                  alt={`Post de redes sociales de ${card.label}`}
-                  width={240}
-                  height={300}
-                  className={`${card.ratio} w-full object-cover`}
-                />
-                <div className="flex items-center gap-3 px-3 py-2 text-[11px] text-snow/80">
-                  <span>♥ {card.likes}</span>
-                  <span>💬 128</span>
-                  <span className="ml-auto text-volt">↗</span>
-                </div>
-              </div>
-            ))}
+              );
+            })}
           </div>
 
           {/* Notificación flotante */}

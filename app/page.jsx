@@ -4,15 +4,22 @@ import Nichos from "@/components/Nichos";
 import SobreMi from "@/components/SobreMi";
 import Footer from "@/components/Footer";
 import Navbar from "@/components/Navbar";
+import { obtenerContenidoLanding } from "@/lib/publico/landing";
 
-export default function Home() {
+export const dynamic = "force-dynamic";
+export const revalidate = 0;
+
+export default async function Home() {
+  const { inicio, tarjetas, nichos, sobre } =
+    await obtenerContenidoLanding();
+
   return (
     <main className="bg-ink">
       <Navbar />
-      <Hero />
+      <Hero seccion={inicio} tarjetas={tarjetas} />
       <QueHacemos />
-      <Nichos />
-      <SobreMi />
+      <Nichos nichos={nichos} />
+      <SobreMi contenido={sobre} />
       <Footer />
     </main>
   );

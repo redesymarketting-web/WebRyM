@@ -132,6 +132,7 @@ export async function guardarSobreNosotros(prevState, formData) {
 
     revalidatePath("/admin/sobre-nosotros");
     revalidatePath("/admin", "layout");
+    revalidatePath("/");
 
     return {
       ok: true,

@@ -26,6 +26,7 @@ function revalidarNichos(nichoId) {
   revalidatePath("/admin/nichos");
   if (nichoId) revalidatePath(`/admin/nichos/${nichoId}`);
   revalidatePath("/admin", "layout");
+  revalidatePath("/");
 }
 
 function obtenerDireccion(formData) {

@@ -6,53 +6,6 @@ import Reveal from "./Reveal";
 import ClientesModal from "./ClientesModal";
 import { DoodleSpiral, DoodleCircle, DoodleWave } from "./Doodles";
 
-const nichos = [
-  {
-    id: "postres",
-    slug: "postres",
-    nombre: "Postres",
-    primary: "#e91e63",
-    badge: "Sweet Branding",
-    card: "/portadapostres.jpg",
-    desc: "Diseño de marca colorido, fotos de producto irresistibles y feeds que endulzan tu audiencia.",
-    heros: ["/dulzurafeed.jpg", "/crunchiefeed.jpg", "/dulzurafeed1.jpg"],
-    titulo: "Pastelerías que venden con los ojos",
-  },
-  {
-    id: "dojos",
-    slug: "dojos-gimnasios",
-    nombre: "Dojos & Gimnasios",
-    primary: "#ef4444",
-    badge: "Fitness Power",
-    card: "/portadadojos.jpg",
-    desc: "Volantes de retos, promos de clases y contenido que convierten seguidores en atletas.",
-    heros: ["/dojofeed.jpg", "/dojofeed1.jpg", "/dojofeed2.jpg"],
-    titulo: "Entrenamiento que inspira disciplina",
-  },
-  {
-    id: "realestate",
-    slug: "real-estate",
-    nombre: "Real Estate",
-    primary: "#0ea5e9",
-    badge: "Premium Property",
-    card: "/portadarealtor.jpg",
-    desc: "Volantes elegantes y publicaciones que posicionan tu marca como la asesora de confianza del mercado.",
-    heros: ["/realtorfeed.jpg", "/realtorfeed1.jpg", "/realtorfeed2.jpg"],
-    titulo: "Propiedades premium, presentación premium",
-  },
-  {
-    id: "talleres",
-    slug: "talleres-automotrices",
-    nombre: "Talleres Automotrices",
-    primary: "#f59e0b",
-    badge: "Auto Industry",
-    card: "/talleresportada.jpg",
-    desc: "Identidad gráfica y contenido que transmiten confianza y calidad en tu taller.",
-    heros: ["/tallerfeed.jpg", "/tallerfeed1.jpg", "/tallerfeed2.jpg"],
-    titulo: "Mecánica de primer nivel, imagen de primer nivel",
-  },
-];
-
 function NicheIcon({ id }) {
   const stroke = "#f7651c";
   const props = { stroke, strokeWidth: 2, strokeLinecap: "round", strokeLinejoin: "round", fill: "none" };
@@ -85,12 +38,20 @@ function NicheIcon({ id }) {
           <path {...props} d="M21 7a6.5 6.5 0 0 0-11 4.6L4 17.7 6.3 20l6.1-6.1A6.5 6.5 0 0 0 21 7z" />
         </svg>
       );
+    case "makeup":
+      return (
+        <svg viewBox="0 0 24 24" className="h-7 w-7" aria-hidden="true">
+          <path {...props} d="M9 3h6v7H9z" />
+          <path {...props} d="M8 10h8v10a1 1 0 0 1-1 1H9a1 1 0 0 1-1-1z" />
+          <path {...props} d="M11 6h2" />
+        </svg>
+      );
     default:
       return null;
   }
 }
 
-function FeedMockup({ items }) {
+function FeedMockup({ items, nombreNicho }) {
   return (
     <div className="overflow-hidden rounded-2xl border border-black/10 bg-white">
       <div className="flex items-center gap-2 border-b border-black/10 px-4 py-2.5">
@@ -106,7 +67,7 @@ function FeedMockup({ items }) {
           <div key={it + i} className="relative aspect-square overflow-hidden rounded-xl">
             <Image
               src={it}
-              alt={`Post de feed para el nicho ${nichos.find((n) => n.heros.includes(it))?.nombre ?? "Redes y Marketting"}`}
+              alt={`Post de feed para el nicho ${nombreNicho || "Redes y Marketting"}`}
               fill
               sizes="160px"
               className="object-cover transition-transform duration-700 hover:scale-110"
@@ -118,10 +79,22 @@ function FeedMockup({ items }) {
   );
 }
 
-export default function Nichos() {
+export default function Nichos({ nichos = [] }) {
   const [activo, setActivo] = useState(0);
   const [isClientesOpen, setIsClientesOpen] = useState(false);
-  const current = nichos[activo];
+  const listaNichos = Array.isArray(nichos) ? nichos : [];
+  const indiceActivo = Math.min(
+    activo,
+    Math.max(listaNichos.length - 1, 0)
+  );
+  const current = listaNichos[indiceActivo] || null;
+  const feed = current
+    ? [
+        current.url_imagen_feed_1,
+        current.url_imagen_feed_2,
+        current.url_imagen_feed_3,
+      ].filter(Boolean)
+    : [];
   const areaRef = useRef(null);
 
   useEffect(() => {
@@ -135,7 +108,7 @@ export default function Nichos() {
       el.style.transform = "translateY(0)";
     }, 40);
     return () => window.clearTimeout(t);
-  }, [activo]);
+  }, [indiceActivo]);
 
   return (
     <section id="nicho" className="relative overflow-hidden py-24 md:py-32">
@@ -159,8 +132,8 @@ export default function Nichos() {
         <Reveal delay={100}>
           {/* Tarjetas verticales de nicho */}
           <div className="grid grid-cols-2 gap-4 md:grid-cols-4 md:gap-6" role="tablist" aria-label="Nichos de mercado">
-            {nichos.map((n, i) => {
-              const activa = i === activo;
+            {listaNichos.map((n, i) => {
+              const activa = i === indiceActivo;
               return (
                 <button
                   key={n.id}
@@ -181,8 +154,8 @@ export default function Nichos() {
                 >
                   <div className="relative aspect-square overflow-hidden">
                     <Image
-                      src={n.card}
-                      alt={`Fotografía del nicho ${n.nombre}`}
+                      src={n.url_imagen_tarjeta || "/placeholder-nicho.svg"}
+                      alt={`Fotografía del nicho ${n.titulo_tarjeta || "Redes y Marketting"}`}
                       fill
                       sizes="(max-width: 768px) 50vw, 25vw"
                       className={`object-cover transition-transform duration-500 group-hover:scale-105 ${
@@ -197,8 +170,8 @@ export default function Nichos() {
                   </div>
                   <div className="p-4">
                     <h3 className="flex items-center justify-center gap-2 text-lg font-black uppercase leading-tight md:text-xl">
-                      <NicheIcon id={n.id} />
-                      <span>{n.nombre}</span>
+                      <NicheIcon id={n.icono} />
+                      <span>{n.titulo_tarjeta}</span>
                     </h3>
                   </div>
                 </button>
@@ -207,67 +180,86 @@ export default function Nichos() {
           </div>
 
           {/* Panel de vista previa */}
-          <div
-            ref={areaRef}
-            className="mt-8 scroll-mt-28 overflow-hidden rounded-[2rem] bg-snow p-6 shadow-xl md:p-10"
-          >
-            <div className="grid items-center gap-10 lg:grid-cols-2">
-              <div>
-                <span
-                  className="mb-4 inline-flex items-center gap-2 rounded-full px-4 py-1.5 text-xs font-black uppercase tracking-widest text-ink"
-                  style={{ backgroundColor: current.primary }}
-                >
-                  {current.badge}
-                </span>
-                <h3 className="text-3xl font-black uppercase text-ink md:text-4xl">
-                  {current.titulo}
-                </h3>
-                <p className="mt-4 max-w-md text-lg font-medium text-ink/70">
-                  {current.desc}
-                </p>
-
-                <div className="mt-8 grid grid-cols-3 gap-3">
-                  {["Diseño exclusivo", "Estrategia", "Identidad gráfica"].map((t) => (
-                    <div
-                      key={t}
-                      className="rounded-xl bg-ink px-3 py-3 text-center"
-                    >
-                      <p className="text-xs font-extrabold text-snow">{t}</p>
-                    </div>
-                  ))}
-                </div>
-              </div>
-
-              <div>
-                <FeedMockup items={current.heros} />
-                <div className="mt-6 flex justify-center">
-                  <button
-                    type="button"
-                    onClick={() => setIsClientesOpen(true)}
-                    className="group inline-flex items-center gap-2 rounded-full border-2 border-ember/40 bg-ember/10 px-5 py-2.5 text-sm font-extrabold uppercase tracking-wide text-ember transition-colors duration-300 hover:bg-ember hover:text-ink"
+          {current ? (
+            <div
+              ref={areaRef}
+              id={`panel-${current.id}`}
+              role="tabpanel"
+              aria-labelledby={`tab-${current.id}`}
+              className="mt-8 scroll-mt-28 overflow-hidden rounded-[2rem] bg-snow p-6 shadow-xl md:p-10"
+            >
+              <div className="grid items-center gap-10 lg:grid-cols-2">
+                <div>
+                  <span
+                    className="mb-4 inline-flex items-center gap-2 rounded-full px-4 py-1.5 text-xs font-black uppercase tracking-widest text-ink"
+                    style={{ backgroundColor: current.color_primario }}
                   >
-                    Clientes que confían
-                    <span className="transition-transform duration-300 group-hover:translate-x-1">
-                      →
-                    </span>
-                  </button>
+                    {current.etiqueta_categoria}
+                  </span>
+                  <h3 className="text-3xl font-black uppercase text-ink md:text-4xl">
+                    {current.titulo_descripcion}
+                  </h3>
+                  <p className="mt-4 max-w-md text-lg font-medium text-ink/70">
+                    {current.texto_descripcion}
+                  </p>
+
+                  {Array.isArray(current.etiquetas_destacadas) &&
+                  current.etiquetas_destacadas.length > 0 ? (
+                    <div className="mt-8 grid grid-cols-3 gap-3">
+                      {current.etiquetas_destacadas.map((etiqueta, indice) => (
+                        <div
+                          key={`${etiqueta}-${indice}`}
+                          className="rounded-xl bg-ink px-3 py-3 text-center"
+                        >
+                          <p className="text-xs font-extrabold text-snow">
+                            {etiqueta}
+                          </p>
+                        </div>
+                      ))}
+                    </div>
+                  ) : null}
+                </div>
+
+                <div>
+                  <FeedMockup
+                    items={feed}
+                    nombreNicho={current.titulo_tarjeta}
+                  />
+                  <div className="mt-6 flex justify-center">
+                    <button
+                      type="button"
+                      onClick={() => setIsClientesOpen(true)}
+                      className="group inline-flex items-center gap-2 rounded-full border-2 border-ember/40 bg-ember/10 px-5 py-2.5 text-sm font-extrabold uppercase tracking-wide text-ember transition-colors duration-300 hover:bg-ember hover:text-ink"
+                    >
+                      Clientes que confían
+                      <span className="transition-transform duration-300 group-hover:translate-x-1">
+                        →
+                      </span>
+                    </button>
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
+          ) : (
+            <div className="mt-8 rounded-[2rem] border border-dashed border-snow/20 px-6 py-12 text-center text-sm font-medium text-snow/60">
+              Todavía no hay nichos publicados.
+            </div>
+          )}
         </Reveal>
       </div>
 
-      <ClientesModal
-        open={isClientesOpen}
-        onClose={() => setIsClientesOpen(false)}
-        nicho={{
-          nombre: current.nombre,
-          primary: current.primary,
-          badge: current.badge,
-        }}
-        nichoSlug={current.slug}
-      />
+      {current ? (
+        <ClientesModal
+          open={isClientesOpen}
+          onClose={() => setIsClientesOpen(false)}
+          nicho={{
+            nombre: current.titulo_tarjeta,
+            primary: current.color_primario,
+            badge: current.etiqueta_categoria,
+          }}
+          nichoSlug={current.slug}
+        />
+      ) : null}
     </section>
   );
 }

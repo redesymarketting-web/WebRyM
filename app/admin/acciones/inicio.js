@@ -20,6 +20,7 @@ function respuestaError(error) {
 function revalidarInicio() {
   revalidatePath("/admin/inicio");
   revalidatePath("/admin", "layout");
+  revalidatePath("/");
 }
 
 function obtenerDireccion(formData) {
