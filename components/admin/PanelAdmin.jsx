@@ -16,7 +16,7 @@ const enlaces = [
   {
     href: "/admin/que-hacemos",
     label: "Qué Hacemos",
-    descripcion: "Planes de gestión de redes",
+    descripcion: "Planes, servicios y portafolio web",
     icono: "planes",
   },
   {

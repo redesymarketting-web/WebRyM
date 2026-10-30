@@ -5,7 +5,6 @@ import Link from "next/link";
 import Reveal from "./Reveal";
 import PlanesModal from "./PlanesModal";
 import DesarrolloWebModal from "./DesarrolloWebModal";
-import { PLANES_REDES } from "@/lib/planes";
 import { DoodleSpiral, DoodleWave } from "./Doodles";
 
 function PcTabletIcon() {
@@ -156,7 +155,6 @@ export default function QueHacemos() {
         onClose={() => setIsPlanesOpen(false)}
         title="Planes de Gestión de Redes"
         subtitle="Elige el plan que mejor se adapte a tu marca y empieza a crecer con estrategia."
-        planes={PLANES_REDES}
       />
 
       <DesarrolloWebModal

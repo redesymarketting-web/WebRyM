@@ -23,6 +23,7 @@ function respuestaError(error) {
 function revalidarPlanes() {
   revalidatePath("/admin/que-hacemos");
   revalidatePath("/admin", "layout");
+  revalidatePath("/");
 }
 
 function obtenerDireccion(formData) {

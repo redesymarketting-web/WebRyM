@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { whatsappHref, PLAN_PERSONALIZADO_TEXT } from "@/lib/planes";
+import { obtenerPlanesRedesPublicos } from "@/app/acciones/queHacemos";
 
 function PaintIcon({ className }) {
   return (
@@ -113,7 +114,7 @@ function PlanCard({ plan }) {
 
       <div className="mt-auto pt-6">
         <a
-          href={whatsappHref(plan.whatsappText)}
+          href={plan.url}
           target="_blank"
           rel="noopener noreferrer"
           aria-label={`Cotizar el plan ${plan.title} por WhatsApp`}
@@ -129,9 +130,12 @@ function PlanCard({ plan }) {
   );
 }
 
-export default function PlanesModal({ open, onClose, title, subtitle, planes }) {
+export default function PlanesModal({ open, onClose, title, subtitle }) {
   const [mounted, setMounted] = useState(false);
   const [visible, setVisible] = useState(false);
+  const [planes, setPlanes] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState("");
   const closeRef = useRef(null);
 
   useEffect(() => {
@@ -143,6 +147,52 @@ export default function PlanesModal({ open, onClose, title, subtitle, planes }) 
     setVisible(false);
     const timeout = setTimeout(() => setMounted(false), 300);
     return () => clearTimeout(timeout);
+  }, [open]);
+
+  useEffect(() => {
+    if (!open) return;
+
+    let cancelado = false;
+
+    setPlanes([]);
+    setError("");
+    setIsLoading(true);
+
+    obtenerPlanesRedesPublicos()
+      .then((resultado) => {
+        if (cancelado) return;
+
+        if (resultado?.error) {
+          setError(resultado.error);
+          return;
+        }
+
+        setPlanes(
+          (resultado?.datos || []).map((plan) => ({
+            id: plan.id,
+            icon: plan.icono,
+            title: plan.nombre_plan,
+            tagline: plan.subtitulo,
+            features: Array.isArray(plan.caracteristicas)
+              ? plan.caracteristicas
+              : [],
+            note: plan.nota_destacada || "",
+            url: plan.url_boton_whatsapp,
+          }))
+        );
+      })
+      .catch(() => {
+        if (!cancelado) {
+          setError("No se pudieron cargar los planes.");
+        }
+      })
+      .finally(() => {
+        if (!cancelado) setIsLoading(false);
+      });
+
+    return () => {
+      cancelado = true;
+    };
   }, [open]);
 
   useEffect(() => {
@@ -204,10 +254,44 @@ export default function PlanesModal({ open, onClose, title, subtitle, planes }) 
             )}
           </header>
 
-          <div className="mt-8 grid grid-cols-1 gap-6 md:grid-cols-2">
-            {planes.map((plan) => (
-              <PlanCard key={plan.id} plan={plan} />
-            ))}
+          <div className="mt-8" aria-busy={isLoading}>
+            {isLoading ? (
+              <div
+                className="grid grid-cols-1 gap-6 md:grid-cols-2"
+                aria-label="Cargando planes"
+              >
+                {[0, 1].map((item) => (
+                  <div
+                    key={item}
+                    className="animate-pulse rounded-2xl bg-snow p-6 ring-1 ring-black/10"
+                  >
+                    <div className="mx-auto h-16 w-16 rounded-2xl bg-ink/10" />
+                    <div className="mx-auto mt-5 h-6 w-2/3 rounded bg-ink/10" />
+                    <div className="mx-auto mt-2 h-3 w-4/5 rounded bg-ink/10" />
+                    <div className="mt-5 space-y-3">
+                      <div className="h-3 w-full rounded bg-ink/10" />
+                      <div className="h-3 w-11/12 rounded bg-ink/10" />
+                      <div className="h-3 w-3/4 rounded bg-ink/10" />
+                    </div>
+                    <div className="mt-6 h-12 w-full rounded-full bg-ink/10" />
+                  </div>
+                ))}
+              </div>
+            ) : error ? (
+              <div className="rounded-2xl border border-red-200 bg-red-50 px-6 py-8 text-center text-sm font-medium text-red-700">
+                {error}
+              </div>
+            ) : planes.length === 0 ? (
+              <div className="rounded-2xl border border-dashed border-ink/15 px-6 py-10 text-center text-sm font-medium text-ink/50">
+                Todavía no hay planes disponibles.
+              </div>
+            ) : (
+              <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
+                {planes.map((plan) => (
+                  <PlanCard key={plan.id} plan={plan} />
+                ))}
+              </div>
+            )}
           </div>
 
           <div className="mt-8 rounded-2xl bg-ink px-6 py-8 text-center sm:px-10">

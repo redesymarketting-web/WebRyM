@@ -1,11 +1,8 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import {
-  SERVICIOS_WEB,
-  PORTAFOLIO_WEB,
-  proyectoWebHref,
-} from "@/lib/desarrolloWeb";
+import { proyectoWebHref } from "@/lib/desarrolloWeb";
+import { obtenerDesarrolloWebPublico } from "@/app/acciones/queHacemos";
 
 function LandingIcon({ className }) {
   return (
@@ -87,6 +84,10 @@ function ServicioCard({ servicio }) {
 export default function DesarrolloWebModal({ open, onClose }) {
   const [mounted, setMounted] = useState(false);
   const [visible, setVisible] = useState(false);
+  const [servicios, setServicios] = useState([]);
+  const [proyectos, setProyectos] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState("");
   const closeRef = useRef(null);
 
   useEffect(() => {
@@ -98,6 +99,59 @@ export default function DesarrolloWebModal({ open, onClose }) {
     setVisible(false);
     const timeout = setTimeout(() => setMounted(false), 300);
     return () => clearTimeout(timeout);
+  }, [open]);
+
+  useEffect(() => {
+    if (!open) return;
+
+    let cancelado = false;
+
+    setServicios([]);
+    setProyectos([]);
+    setError("");
+    setIsLoading(true);
+
+    obtenerDesarrolloWebPublico()
+      .then((resultado) => {
+        if (cancelado) return;
+
+        if (resultado?.error) {
+          setError(resultado.error);
+          return;
+        }
+
+        const datos = resultado?.datos || {};
+
+        setServicios(
+          (datos.servicios || []).map((servicio) => ({
+            id: servicio.id,
+            icon: servicio.icono,
+            title: servicio.titulo,
+            desc: servicio.descripcion,
+          }))
+        );
+
+        setProyectos(
+          (datos.proyectos || []).map((proyecto) => ({
+            id: proyecto.id,
+            nombre: proyecto.nombre,
+            descripcion: proyecto.descripcion,
+            url: proyecto.url_sitio,
+          }))
+        );
+      })
+      .catch(() => {
+        if (!cancelado) {
+          setError("No se pudo cargar el contenido de Desarrollo Web.");
+        }
+      })
+      .finally(() => {
+        if (!cancelado) setIsLoading(false);
+      });
+
+    return () => {
+      cancelado = true;
+    };
   }, [open]);
 
   useEffect(() => {
@@ -158,66 +212,125 @@ export default function DesarrolloWebModal({ open, onClose }) {
             </p>
           </header>
 
-          <div className="mt-8">
-            <h4 className="text-xl font-black uppercase text-ink sm:text-2xl">
-              Haz que cada visita se convierta en una{" "}
-              <span className="text-ember">oportunidad real</span>.
-            </h4>
-            <p className="mt-3 font-medium leading-relaxed text-ink/70">
-              Creamos espacios digitales diseñados a la medida exacta de tu
-              marca para impulsar tus objetivos de negocio de forma clara y
-              efectiva:
-            </p>
-          </div>
-
-          <div className="mt-7 grid gap-5 sm:grid-cols-3">
-            {SERVICIOS_WEB.map((servicio) => (
-              <ServicioCard key={servicio.id} servicio={servicio} />
-            ))}
-          </div>
-
-          <div className="mt-10">
-            <div className="mb-5 text-center sm:text-left">
-              <h4 className="text-2xl font-black uppercase text-ink">
-                Proyectos <span className="text-ember">publicados</span>
-              </h4>
-              <p className="text-sm font-medium text-ink/50">
-                Marcas que ya confían en Redes y Marketting para su presencia web.
-              </p>
+          {error ? (
+            <div className="mt-8 rounded-2xl border border-red-200 bg-red-50 px-6 py-8 text-center text-sm font-medium text-red-700">
+              {error}
             </div>
+          ) : (
+            <>
+              <div className="mt-8">
+                <h4 className="text-xl font-black uppercase text-ink sm:text-2xl">
+                  Haz que cada visita se convierta en una{" "}
+                  <span className="text-ember">oportunidad real</span>.
+                </h4>
+                <p className="mt-3 font-medium leading-relaxed text-ink/70">
+                  Creamos espacios digitales diseñados a la medida exacta de tu
+                  marca para impulsar tus objetivos de negocio de forma clara y
+                  efectiva:
+                </p>
+              </div>
 
-            <div className="grid gap-5 md:grid-cols-2">
-              {PORTAFOLIO_WEB.map((proyecto) => (
-                <article
-                  key={proyecto.id}
-                  className="flex h-full flex-col rounded-2xl border-2 border-ember bg-white p-6 shadow-[0_10px_30px_rgba(2,2,2,0.06)]"
-                >
-                  <p className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-ember">
-                    <span className="h-1.5 w-1.5 rounded-full bg-ember" />
-                    Sitio en vivo
-                  </p>
-                  <h5 className="mt-2 text-xl font-black text-ink">
-                    {proyecto.nombre}
-                  </h5>
-                  <p className="mt-2 text-sm leading-relaxed text-ink/70">
-                    {proyecto.descripcion}
-                  </p>
-                  <a
-                    href={proyecto.url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    aria-label={`Visitar el sitio de ${proyecto.nombre}`}
-                    className="mt-auto pt-5"
+              <div className="mt-7" aria-busy={isLoading}>
+                {isLoading ? (
+                  <div
+                    className="grid gap-5 sm:grid-cols-3"
+                    aria-label="Cargando servicios"
                   >
-                    <span className="inline-flex items-center gap-2 rounded-full bg-ember px-5 py-2.5 text-sm font-black uppercase tracking-wide text-ink transition-all hover:bg-volt">
-                      Visitar sitio
-                      <ExternalIcon />
-                    </span>
-                  </a>
-                </article>
-              ))}
-            </div>
-          </div>
+                    {[0, 1, 2].map((item) => (
+                      <div
+                        key={item}
+                        className="animate-pulse rounded-2xl bg-snow p-5 ring-1 ring-black/10"
+                      >
+                        <div className="mx-auto h-14 w-14 rounded-2xl bg-ink/10" />
+                        <div className="mx-auto mt-4 h-4 w-3/4 rounded bg-ink/10" />
+                        <div className="mx-auto mt-3 h-3 w-full rounded bg-ink/10" />
+                        <div className="mx-auto mt-2 h-3 w-5/6 rounded bg-ink/10" />
+                      </div>
+                    ))}
+                  </div>
+                ) : servicios.length === 0 ? (
+                  <div className="rounded-2xl border border-dashed border-ink/15 px-6 py-8 text-center text-sm font-medium text-ink/50">
+                    Todavía no hay servicios disponibles.
+                  </div>
+                ) : (
+                  <div className="grid gap-5 sm:grid-cols-3">
+                    {servicios.map((servicio) => (
+                      <ServicioCard key={servicio.id} servicio={servicio} />
+                    ))}
+                  </div>
+                )}
+              </div>
+
+              <div className="mt-10">
+                <div className="mb-5 text-center sm:text-left">
+                  <h4 className="text-2xl font-black uppercase text-ink">
+                    Proyectos <span className="text-ember">publicados</span>
+                  </h4>
+                  <p className="text-sm font-medium text-ink/50">
+                    Marcas que ya confían en Redes y Marketting para su presencia web.
+                  </p>
+                </div>
+
+                <div aria-busy={isLoading}>
+                  {isLoading ? (
+                    <div
+                      className="grid gap-5 md:grid-cols-2"
+                      aria-label="Cargando proyectos"
+                    >
+                      {[0, 1].map((item) => (
+                        <div
+                          key={item}
+                          className="animate-pulse rounded-2xl border-2 border-ember/20 bg-white p-6"
+                        >
+                          <div className="h-3 w-24 rounded bg-ink/10" />
+                          <div className="mt-3 h-6 w-2/3 rounded bg-ink/10" />
+                          <div className="mt-3 h-3 w-full rounded bg-ink/10" />
+                          <div className="mt-2 h-3 w-4/5 rounded bg-ink/10" />
+                          <div className="mt-6 h-10 w-32 rounded-full bg-ink/10" />
+                        </div>
+                      ))}
+                    </div>
+                  ) : proyectos.length === 0 ? (
+                    <div className="rounded-2xl border border-dashed border-ink/15 px-6 py-8 text-center text-sm font-medium text-ink/50">
+                      Todavía no hay proyectos publicados.
+                    </div>
+                  ) : (
+                    <div className="grid gap-5 md:grid-cols-2">
+                      {proyectos.map((proyecto) => (
+                        <article
+                          key={proyecto.id}
+                          className="flex h-full flex-col rounded-2xl border-2 border-ember bg-white p-6 shadow-[0_10px_30px_rgba(2,2,2,0.06)]"
+                        >
+                          <p className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-ember">
+                            <span className="h-1.5 w-1.5 rounded-full bg-ember" />
+                            Sitio en vivo
+                          </p>
+                          <h5 className="mt-2 text-xl font-black text-ink">
+                            {proyecto.nombre}
+                          </h5>
+                          <p className="mt-2 text-sm leading-relaxed text-ink/70">
+                            {proyecto.descripcion}
+                          </p>
+                          <a
+                            href={proyecto.url}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            aria-label={`Visitar el sitio de ${proyecto.nombre}`}
+                            className="mt-auto pt-5"
+                          >
+                            <span className="inline-flex items-center gap-2 rounded-full bg-ember px-5 py-2.5 text-sm font-black uppercase tracking-wide text-ink transition-all hover:bg-volt">
+                              Visitar sitio
+                              <ExternalIcon />
+                            </span>
+                          </a>
+                        </article>
+                      ))}
+                    </div>
+                  )}
+                </div>
+              </div>
+            </>
+          )}
 
           <div className="mt-8 rounded-2xl bg-ink px-6 py-8 text-center sm:px-10">
             <p className="text-lg font-black uppercase tracking-wide text-snow">
