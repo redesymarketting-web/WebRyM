@@ -4,12 +4,12 @@ import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
 import Reveal from "./Reveal";
 import ClientesModal from "./ClientesModal";
-import { CLIENTES_NICHOS } from "@/lib/clientesNichos";
 import { DoodleSpiral, DoodleCircle, DoodleWave } from "./Doodles";
 
 const nichos = [
   {
     id: "postres",
+    slug: "postres",
     nombre: "Postres",
     primary: "#e91e63",
     badge: "Sweet Branding",
@@ -20,6 +20,7 @@ const nichos = [
   },
   {
     id: "dojos",
+    slug: "dojos-gimnasios",
     nombre: "Dojos & Gimnasios",
     primary: "#ef4444",
     badge: "Fitness Power",
@@ -30,6 +31,7 @@ const nichos = [
   },
   {
     id: "realestate",
+    slug: "real-estate",
     nombre: "Real Estate",
     primary: "#0ea5e9",
     badge: "Premium Property",
@@ -40,6 +42,7 @@ const nichos = [
   },
   {
     id: "talleres",
+    slug: "talleres-automotrices",
     nombre: "Talleres Automotrices",
     primary: "#f59e0b",
     badge: "Auto Industry",
@@ -263,7 +266,7 @@ export default function Nichos() {
           primary: current.primary,
           badge: current.badge,
         }}
-        clientes={CLIENTES_NICHOS[current.id] ?? []}
+        nichoSlug={current.slug}
       />
     </section>
   );

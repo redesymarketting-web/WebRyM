@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { nuevoClienteHref } from "@/lib/clientesNichos";
+import { obtenerClientesNichoPublico } from "@/app/acciones/clientesNicho";
 
 function CloseIcon() {
   return (
@@ -45,9 +46,12 @@ function ClienteCard({ cliente }) {
   );
 }
 
-export default function ClientesModal({ open, onClose, nicho, clientes }) {
+export default function ClientesModal({ open, onClose, nicho, nichoSlug }) {
   const [mounted, setMounted] = useState(false);
   const [visible, setVisible] = useState(false);
+  const [clientes, setClientes] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState("");
   const closeRef = useRef(null);
 
   useEffect(() => {
@@ -60,6 +64,47 @@ export default function ClientesModal({ open, onClose, nicho, clientes }) {
     const timeout = setTimeout(() => setMounted(false), 300);
     return () => clearTimeout(timeout);
   }, [open]);
+
+  useEffect(() => {
+    if (!open) return;
+
+    let cancelado = false;
+
+    setClientes([]);
+    setError("");
+    setIsLoading(true);
+
+    obtenerClientesNichoPublico(nichoSlug)
+      .then((resultado) => {
+        if (cancelado) return;
+
+        if (resultado?.error) {
+          setError(resultado.error);
+          return;
+        }
+
+        setClientes(
+          (resultado?.datos || []).map((cliente) => ({
+            id: cliente.id,
+            nombre: cliente.nombre_cliente,
+            descripcion: cliente.descripcion_cliente,
+            url: cliente.url_sitio,
+          }))
+        );
+      })
+      .catch(() => {
+        if (!cancelado) {
+          setError("No se pudieron cargar los clientes.");
+        }
+      })
+      .finally(() => {
+        if (!cancelado) setIsLoading(false);
+      });
+
+    return () => {
+      cancelado = true;
+    };
+  }, [open, nichoSlug]);
 
   useEffect(() => {
     if (!mounted) return;
@@ -130,10 +175,39 @@ export default function ClientesModal({ open, onClose, nicho, clientes }) {
             )}
           </header>
 
-          <div className="mt-8 grid grid-cols-1 gap-6 md:grid-cols-2">
-            {clientes.map((cliente) => (
-              <ClienteCard key={cliente.id} cliente={cliente} />
-            ))}
+          <div className="mt-8" aria-busy={isLoading}>
+            {isLoading ? (
+              <div
+                className="grid grid-cols-1 gap-6 md:grid-cols-2"
+                aria-label="Cargando clientes"
+              >
+                {[0, 1].map((item) => (
+                  <div
+                    key={item}
+                    className="animate-pulse rounded-2xl border-2 border-ember/20 bg-white p-6"
+                  >
+                    <div className="h-6 w-2/3 rounded bg-ink/10" />
+                    <div className="mt-4 h-3 w-full rounded bg-ink/10" />
+                    <div className="mt-2 h-3 w-4/5 rounded bg-ink/10" />
+                    <div className="mt-6 h-10 w-28 rounded-full bg-ink/10" />
+                  </div>
+                ))}
+              </div>
+            ) : error ? (
+              <div className="rounded-2xl border border-red-200 bg-red-50 px-6 py-8 text-center text-sm font-medium text-red-700">
+                {error}
+              </div>
+            ) : clientes.length === 0 ? (
+              <div className="rounded-2xl border border-dashed border-ink/15 px-6 py-10 text-center text-sm font-medium text-ink/50">
+                Este nicho todavía no tiene clientes.
+              </div>
+            ) : (
+              <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
+                {clientes.map((cliente) => (
+                  <ClienteCard key={cliente.id} cliente={cliente} />
+                ))}
+              </div>
+            )}
           </div>
 
           <div className="mt-8 rounded-2xl bg-ink px-6 py-8 text-center sm:px-10">
